@@ -3,8 +3,10 @@
         <tr>
           <th scope="row">{{no}}</th>
           <td>{{name}}</td>
-          <td>{{city}}</td>
           <td>{{age}}</td>
+          <td>{{city}}</td>
+          <td>{{country}}</td>
+          <td>{{status}}</td>
         </tr>
       </tbody>
 
@@ -16,10 +18,12 @@ export default {
   name: 'Todalist',
   props: {
     msg: String,
-    no: Number,
+    no: String,
     name: String,
     city: String,
-    age: Number,
+    country: String,
+    status: String,
+    age: String,
   }
 }
 </script>

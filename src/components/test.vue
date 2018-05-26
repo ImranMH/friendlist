@@ -8,7 +8,7 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
   name: 'Test',
   props: {
@@ -25,6 +25,12 @@ export default {
       console.log(this.selectedFile)
     },
     upload(){
+      const formData = new FormData()
+      formData.append('image',this.selectedFile,this.selectedFile.name)
+      axios.post('https://us-central1-testwithvue-24462.cloudfunctions.net/uploadFile',formData).then(res=>{
+        console.log(res)
+      })
+      console.log(formData)
       console.log('uploading')
     }
   }
