@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
          <div class="user">
-           <p>{{friends}}</p>
+           <span>{{ new Date() | moment("dddd, MMMM Do YYYY") }}</span>
           <div >
             <router-link to="/user/new" class="nav-link"><i class="fas fa-plus"></i> addnew</router-link>
             <table class="table table-striped">
@@ -15,7 +15,7 @@
                   <th scope="col">City</th>
                   <th scope="col">Country</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Langudge</th>
+                  <th scope="col">Language</th>
                 </tr>
             </thead>
               <!-- <Todalist msg="hellow" v-bind:name="user.name" v-bind:country="user.country" v-bind:age="user.age" v-bind:city="user.city" v-bind:status="user.type" v-bind:no="user.title" /> -->
@@ -26,8 +26,8 @@
                 <td>{{user.age}}</td>
                 <td>{{user.city}}</td>
                 <td>{{user.country}}</td>
-                <td>{{user.status}}</td>
-                <td>{{user.langudge}}</td>
+                <td>{{user.type}}</td>
+                <td>{{user.language}}</td>
               </tr>
               </tbody>
             </table>
@@ -68,7 +68,7 @@ export default {
           country:u.val().country,
           city:u.val().city,
           age:u.val().age,
-          status:u.val().title,
+          language:u.val().language,
           type:u.val().type,
         }
         this.userdata.push(data)
@@ -76,7 +76,7 @@ export default {
     }) 
    
     // firebese firestore implementation
-  db.collection('users').get().then((querySnaphot)=>{
+/*   db.collection('users').get().then((querySnaphot)=>{
     querySnaphot.forEach((doc)=>{
       //console.log(doc)
       const friend = {
@@ -84,7 +84,7 @@ export default {
       }
       this.friends.push(friend)
     })
-  })
+  }) */
   },
   watch:{
  /*    '$route'(to, from){
@@ -95,10 +95,7 @@ export default {
     return{
       inputdata: {},
 
-      userdata: [],
-      
-      friends: [
-      ]
+      userdata: []
     }
   },
    methods:{

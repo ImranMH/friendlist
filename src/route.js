@@ -5,6 +5,7 @@ import Todos from './components/todo.vue'
 import User from './components/user/User.vue'
 import NewUser from './components/user/NewUser.vue'
 import SingleUser from './components/user/SingleUser.vue'
+import EditUser from './components/user/EditUser.vue'
 import Login from './components/login/index.vue'
 import Signup from './components/login/signup.vue'
 import { auth } from './firebase'
@@ -30,6 +31,13 @@ const routes = [
     {
     path: '/user/new',
     component: NewUser,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/user/:id/edit',
+    component: EditUser,
     meta: {
       requiresAuth: true
     }

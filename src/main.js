@@ -3,7 +3,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './route'
 import firebase from 'firebase'
-
+Vue.use(require('vue-moment'));
 let app ;
 
 Vue.config.productionTip = false

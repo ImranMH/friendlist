@@ -58,14 +58,8 @@ export default {
       }else{
           this.isLoggedIn= false
       }
-      console.log(this.isLoggedIn)
   },
   methods:{
-    //   mounted: function name() {
-    //       if(auth.currentUser){
-    //         authenticate = true
-    //       }
-    //   },
       logout: function() {
          
           auth.signOut().then(e=>{
