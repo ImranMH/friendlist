@@ -71,7 +71,7 @@ export default {
         if(user){
             console.log('authenticated as ',user.uid)
             this.authenticate = true
-            this.$router.push('/home')
+            this.$router.push('/')
             //this.$router.go({path:this.$router.path})
         }
       })

@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Todos from './components/todo.vue'
+import Home from './components/home/Home.vue'
+import Profile from './components/home/Profile.vue'
+import EditProfile from './components/home/EditProfile.vue'
 import User from './components/user/User.vue'
 import NewUser from './components/user/NewUser.vue'
 import SingleUser from './components/user/SingleUser.vue'
@@ -14,9 +16,25 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
-    component: Todos,
+    component: Home,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/home/:ProfileId',
+    name: 'Profile',
+    component: Profile,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/home/:ProfileId/edit',
+    name: 'editProfile',
+    component: EditProfile,
     meta: {
       requiresAuth: true
     }

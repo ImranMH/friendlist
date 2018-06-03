@@ -196,9 +196,10 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
             }
           }
         })
-        .then(() => {
+        .then((user) => {
           res.status(200).json({
-            message: "It worked!"
+            message: "It worked!",
+            user:user
           });
         })
         .catch(err => {

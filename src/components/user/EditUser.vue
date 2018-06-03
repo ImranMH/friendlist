@@ -1,7 +1,7 @@
 <template>
 <div class="singleFriend">
     
-   <div class="container ">
+<!--    <div class="container ">
      <div class="row">
        <div class="col-md-12">
           <span v-show="displayMood" @click="showEdit"> Edit </span>
@@ -41,7 +41,7 @@
             <li class="edit_item">
              <div class="currently_live">
               Current Location: <input v-show="editMood" v-model="singleFriend.currentLocation" type="text" placeholder="Current Location">
-               <span v-show="displayMood">{{singleFriend.currentLocation}} </span> 
+               <span v-show="displayMood">{{singleFriend.currentLocation || 'Not specified yet'}} </span> 
              </div>
            </li>
             <li class="edit_item">
@@ -102,17 +102,159 @@
            </li>
 
 
-           <!-- <li class="edit_item" v-for="(account, index) of socialAcounts" :key="index">
+          
+         </ul>
+         <h2>Add social Account </h2>
+         <ul>
+            <li class="edit_item" v-for="(account, index) of socialAcounts" :key="index">
              <div class="knowFrom">
-              {{account}} : <input v-show="editMood" v-model="singleFriend.account" type="text" placeholder="Social Accunt">
-               <span v-show="displayMood">{{singleFriend.account}} </span> 
+              {{account}} : <input v-show="editMood" v-model="singleFriend[account]" type="text" placeholder="Social Accunt">
+               <span v-show="displayMood">{{singleFriend[account] || 'Not specified yet'}} </span> 
              </div>
-           </li> -->
+           </li>
          </ul>
        </div>
      </div>
      edit page
      {{singleFriend}}
+  </div> -->
+  <div class="container ">
+    <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-info alert-dismissable">
+            <a class="panel-close close" data-dismiss="alert">×</a> 
+            <i class="fa fa-coffee"></i>
+            This is an <strong>.alert</strong>. Use this to show important messages to the user.
+          </div>
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="text-center">
+            <input style="display:none" ref="selectImage" class ="form-control"  type="file" v-on:change ="onFileSelected" >
+            <!-- <button @click="$refs.selectImage.click()"> change Image </button> -->
+            
+            <img style="width:100px" @click="$refs.selectImage.click()" :src="currentUser.photoURL" class="avatar img-circle" alt="avatar">
+            <h6>Change Profile photo</h6>
+            <input class= "btn btn-primary" v-if="showChangePhoto" @click="updateAvater" value="Change Photo" >
+            
+            <!-- <input type="file" class="form-control"> -->
+          </div>
+        </div>
+        <div class="col-md-9">
+          <span v-show="displayMood" @click="showEdit"> Edit </span>
+          <span v-show="editMood" @click="updateOption"> Update </span>
+          <span v-show="editMood" @click="hideEdit" > Cancle</span>
+          <ul class="edit">
+            <li class="edit_item">
+              <div class="name">
+                Name <input v-show="editMood" v-model="singleFriend.name" type="text" placeholder="Name">
+                <span v-show="displayMood"> name:{{singleFriend.name}} </span> 
+              </div>
+            </li>
+              <li class="edit_item">
+              <div class="email">
+                Email <input v-show="editMood" v-model="singleFriend.email" type="text" placeholder="email">
+                <span v-show="displayMood"> email:{{singleFriend.email}} </span> 
+              </div>
+            </li>
+              <li class="edit_item">
+              <div class="age">
+                Age: <input v-show="editMood" v-model="singleFriend.age" type="number" placeholder="Age">
+                <span v-show="displayMood">{{singleFriend.age}} </span> 
+              </div>
+            </li>
+              <li class="edit_item">
+              <div class="mobile">
+                  mobile:<input v-show="editMood" v-model="singleFriend.mobile" type="number" placeholder="mobile">
+                <span v-show="displayMood">{{singleFriend.mobile}} </span> 
+              </div>
+            </li>
+              <li class="edit_item">
+              <div class="mobile">
+                Address: <input v-show="editMood" v-model="singleFriend.address" type="text" placeholder="address">
+                <span v-show="displayMood">{{singleFriend.address}} </span> 
+              </div>
+            </li>
+              <li class="edit_item">
+              <div class="currently_live">
+                Current Location: <input v-show="editMood" v-model="singleFriend.currentLocation" type="text" placeholder="Current Location">
+                <span v-show="displayMood">{{singleFriend.currentLocation || 'Not specified yet'}} </span> 
+              </div>
+            </li>
+              <li class="edit_item">
+              <div class="sex">
+                  meet in real life :<select v-show="editMood" v-model="singleFriend.isMeet"> 
+                    <option value=true>Yes</option>
+                    <option value=false>No</option>
+                  </select>
+                <span v-show="displayMood">{{singleFriend.isMeet}} </span> 
+              </div>
+            </li>
+            <li class="edit_item">
+              <div class="sex">
+                  sex:<select v-show="editMood" v-model="singleFriend.sex"> 
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                  </select>
+                <span v-show="displayMood">{{singleFriend.sex}} </span> 
+              </div>
+            </li>
+            <li class="edit_item">
+              <div class="type">
+                  Friend Type :<select v-show="editMood" v-model="singleFriend.type"> 
+                    <option v-for = "(type, index) of friendType" :value="type" v-bind:key ="index" >{{type}}</option>
+                    
+                  </select>
+                <span v-show="displayMood">{{singleFriend.type}} </span> 
+              </div>
+            </li>
+            <li class="edit_item">
+              <div class="status">
+                  status:<select v-show="editMood" v-model="singleFriend.status"> 
+                    <option value="connected">connected</option>
+                    <option value="disconnected">disconnected</option>
+                    <option value="abnbdant">abnbdant</option>
+                    <option value="loosely connected">loosely connected</option>
+                  </select>
+                <span v-show="displayMood">{{singleFriend.status}} </span> 
+              </div>
+            </li>
+              <li class="edit_item">
+              <div class="currently_live">
+                Way of Communication: <input v-show="editMood" v-model="singleFriend.communicationWay" type="text" placeholder="Facebook">
+                <span v-show="displayMood">{{singleFriend.communicationWay}} </span> 
+              </div>
+            </li>
+            <li class="edit_item">
+              <div class="knowFrom">
+                Know From : <input v-show="editMood" v-model="singleFriend.knowFrom" type="date" placeholder="knowFrom">
+                <span v-show="displayMood">{{singleFriend.knowFrom}} </span> 
+              </div>
+            </li>
+              <li class="edit_item">
+              <div class="knowFrom">
+                Friendship Break : <input v-show="editMood" v-model="singleFriend.friendshipBreak" type="date" placeholder="Friendship Break">
+                <span v-show="displayMood">{{singleFriend.friendshipBreak}} </span> 
+              </div>
+            </li>
+
+
+            
+          </ul>
+          <h2>Add social Account </h2>
+          <ul>
+              <li class="edit_item" v-for="(account, index) of socialAcounts" :key="index">
+              <div class="knowFrom">
+                {{account}} : <input v-show="editMood" v-model="singleFriend[account]" type="text" placeholder="Social Accunt">
+                <span v-show="displayMood">{{singleFriend[account] || 'Not specified yet'}} </span> 
+              </div>
+            </li>
+          </ul>
+      </div>
+      </div>
+      
   </div>
 </div>
  
@@ -121,7 +263,7 @@
 
 <script>
 //import axios from 'axios'
-import {auth,rtdb, db} from './../../firebase'
+import {auth,rtdb,storageRef, db} from './../../firebase'
 export default {
   name: 'EditUser',
   props: {
@@ -134,8 +276,14 @@ export default {
       actionButton: 'Edit',
       displayMood: true,
       editMood: false,
-      friendType: ['facebook','whatsApp','mobile','best friend'],
-      socialAcounts: ['facebook', 'twitter', 'instagram', 'whatsApp','linkedIn','skype','google_plus']
+      currentUser : auth.currentUser,
+      showChangePhoto : false,
+      friendType: ['Best friend','Childhood friend','Close friend','Love relation','School friend','College friend',
+        'university friend','Educational friend','Business partner','Just friend','Helpful friend','Time pass friend',
+        'Corporate friend','Community friend','Friends friend','Facebook friend','WhatsApp friend','Speaky app friend',
+        'Local friend','Mobile friend','Online friend'
+      ],
+      socialAcounts: ['facebook', 'twitter', 'instagram', 'whatsApp','linkedIn','skype','google_plus','musically']
     }
   },
   created: function () {
@@ -171,8 +319,6 @@ export default {
       this.displayMood = true
     },
     updateOption(){
-      console.log('updted')
-      console.log(this.singleFriend)
       let id = this.$route.params.id
       let currentUserId= auth.currentUser.uid
       //const user = rtdb.ref('users').child(currentUserId)
@@ -196,7 +342,37 @@ export default {
       //         console.log(snap.val())
       // })
      
+    },
+
+    onFileSelected(event){
+      this.selectedFile = event.target.files[0];
+      this.showChangePhoto = true
+    },
+    updateAvater(){
+            
+      const fileName = this.selectedFile.name
+      let currentUserId= auth.currentUser.uid
+      const userprofileRef = storageRef.ref('friends/'+currentUserId+'/'+ fileName)
+      // Upload the file and metadata
+      const uploadTask = userprofileRef.put(this.selectedFile);
+
+      uploadTask.on('state_changed', (snapshot)=>{
+ 
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+      }, (error) =>{
+        console.log(error)
+      }, () =>{
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL)=> {
+          console.log('File available at', downloadURL);
+        let friendId = this.$route.params.id
+        //const user = rtdb.ref('users').child(currentUserId)
+        const user = rtdb.ref('users').child(currentUserId).child(friendId)
+          .update({"avatar": downloadURL})
+        });
+      });
     }
+
   },
 }
 

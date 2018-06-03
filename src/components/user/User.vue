@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
+      {{cu}}
       <div class="col-md-12">
          <div class="user">
            <span>{{ new Date() | moment("dddd, MMMM Do YYYY") }}</span>
@@ -21,7 +22,7 @@
               <!-- <Todalist msg="hellow" v-bind:name="user.name" v-bind:country="user.country" v-bind:age="user.age" v-bind:city="user.city" v-bind:status="user.type" v-bind:no="user.title" /> -->
             <tbody>
               <tr  v-for = "user of userdata " v-bind:key ="user.id">
-                <td>{{user.title}}</td>
+                <td><img src="" alt=""></td>
                 <td><router-link :to="'user/'+user.id" > {{user.name}}</router-link></td>
                 <td>{{user.age}}</td>
                 <td>{{user.city}}</td>
@@ -52,10 +53,10 @@ export default {
 
   },
    created: function () {
-     
-
+    console.log('created')
     // realtime database implementation
 
+    
     let currentUserId= auth.currentUser.uid
     const user = rtdb.ref('users').child(currentUserId)
     user.on('value',snap=>{
@@ -63,7 +64,7 @@ export default {
       snap.forEach(u=>{
         const data ={
           id:u.key,
-          title:u.val().title,
+          avatar:u.val().avatar,
           name:u.val().name,
           country:u.val().country,
           city:u.val().city,
@@ -74,6 +75,7 @@ export default {
         this.userdata.push(data)
       })
     }) 
+   
    
     // firebese firestore implementation
 /*   db.collection('users').get().then((querySnaphot)=>{
@@ -86,6 +88,11 @@ export default {
     })
   }) */
   },
+   mounted: function () {
+      console.log('mounted')
+      const cu = auth.currentUser;
+      console.log(cu)
+    },
   watch:{
  /*    '$route'(to, from){
       alert(to.params.id)
@@ -94,7 +101,7 @@ export default {
   data(){
     return{
       inputdata: {},
-
+      cu : null,
       userdata: []
     }
   },

@@ -4,6 +4,9 @@
    <div class="container ">
     <div class="row ">
       <div class="col-md-12"> 
+        <div class="avater">
+          <img :src="singleFriend.avatar" alt="">
+        </div>
         <div class="single_user_top_container singleFriend_container">
          <h1>{{singleFriend.name}} </h1>
         <small>{{singleFriend.type}} friend</small> 
@@ -34,6 +37,18 @@
               <div class="user_info">
                 <span class="user_info__title">mobile:</span>
                 {{singleFriend.mobile}}
+              </div>
+            </li>
+            <li class="user_list">
+              <div class="user_info">
+                <span class="user_info__title">address:</span>
+                {{singleFriend.address ||singleFriend.city +', '+singleFriend.country}}
+              </div>
+            </li>
+            <li class="user_list">
+              <div class="user_info">
+                <span class="user_info__title">Current Location:</span>
+                {{singleFriend.currentLocation ||singleFriend.city +', '+singleFriend.country}}
               </div>
             </li>
             <li class="user_list">
@@ -125,16 +140,16 @@
         <div class="friend_social">
           <ul>
             <li>
-              <a href=""><i class="fa fa-facebook"></i></a>
+              <a href="" ><i class="fa fa-facebook"></i></a>
             </li>
             <li>
-              <a href=""><i class="fa fa-twitter"></i></a>
+              <a v-bind:href ="singleFriend.google_plus"><i class="fa fa-twitter"></i></a>
             </li>
             <li>
               <a href=""><i class="fa fa-instagram"></i></a>
             </li>
             <li>
-              <a href=""><i class="fa fa-skype"></i></a>
+              <a href=""><i class="fa fa-skype">{{singleFriend.google_plus}}</i></a>
             </li>
           </ul>
         </div>
