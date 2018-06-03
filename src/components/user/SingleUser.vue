@@ -3,14 +3,15 @@
     
    <div class="container ">
     <div class="row ">
-      <div class="col-md-12"> 
-        <div class="avater">
-          <img :src="singleFriend.avatar" alt="">
-        </div>
+      <div class="col-md-12">
         <div class="single_user_top_container singleFriend_container">
          <h1>{{singleFriend.name}} </h1>
         <small>{{singleFriend.type}} friend</small> 
+        </div> 
+        <div class="avater">
+          <img :src="singleFriend.avatar" alt="">
         </div>
+       
         <div class="edit_profile_link">
           <router-link :to="'/user/'+$route.params.id+'/edit'" class="nav-link"><i class="fa fa-edit"></i> Edit Profile</router-link>
         </div>

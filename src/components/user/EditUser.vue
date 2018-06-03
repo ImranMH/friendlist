@@ -171,7 +171,7 @@
                 <span v-show="displayMood">{{singleFriend.mobile}} </span> 
               </div>
             </li>
-              <li class="edit_item">
+            <li class="edit_item">
               <div class="mobile">
                 Address: <input v-show="editMood" v-model="singleFriend.address" type="text" placeholder="address">
                 <span v-show="displayMood">{{singleFriend.address}} </span> 
@@ -183,13 +183,28 @@
                 <span v-show="displayMood">{{singleFriend.currentLocation || 'Not specified yet'}} </span> 
               </div>
             </li>
-              <li class="edit_item">
+            <li class="edit_item">
               <div class="sex">
                   meet in real life :<select v-show="editMood" v-model="singleFriend.isMeet"> 
                     <option value=true>Yes</option>
                     <option value=false>No</option>
                   </select>
                 <span v-show="displayMood">{{singleFriend.isMeet}} </span> 
+              </div>
+            </li>
+            <li class="edit_item">
+              <div class="sex">
+                  Friends From :<select v-show="editMood" v-model="singleFriend.foreigner"> 
+                    <option value=native>Native</option>
+                    <option value=foreigner>Foreigner</option>
+                  </select>
+                <span v-show="displayMood">{{singleFriend.foreigner}} </span> 
+              </div>
+            </li>
+             <li class="edit_item">
+              <div class="mobile">
+                Date Of birth: <input v-show="editMood" v-model="singleFriend.dob" type="date" placeholder="date of birth">
+                <span v-show="displayMood">{{singleFriend.dob}} </span> 
               </div>
             </li>
             <li class="edit_item">

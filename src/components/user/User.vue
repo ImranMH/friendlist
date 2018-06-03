@@ -4,31 +4,35 @@
       {{cu}}
       <div class="col-md-12">
          <div class="user">
-           <span>{{ new Date() | moment("dddd, MMMM Do YYYY") }}</span>
+           
           <div >
-            <router-link to="/user/new" class="nav-link"><i class="fas fa-plus"></i> addnew</router-link>
+            <router-link to="/user/new" class="nav_link"><i class="fas fa-plus"></i> addnew</router-link>
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th scope="col">List</th>
+                  <th scope="col">image</th>
                   <th scope="col">Name</th>
+                  <th scope="col">Type</th>
                   <th scope="col">Age</th>
                   <th scope="col">City</th>
                   <th scope="col">Country</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Language</th>
+                  <th scope="col">Mobile</th>
+                  <th scope="col">Know For</th>
                 </tr>
             </thead>
               <!-- <Todalist msg="hellow" v-bind:name="user.name" v-bind:country="user.country" v-bind:age="user.age" v-bind:city="user.city" v-bind:status="user.type" v-bind:no="user.title" /> -->
             <tbody>
               <tr  v-for = "user of userdata " v-bind:key ="user.id">
-                <td><img src="" alt=""></td>
+                <td><router-link :to="'user/'+user.id" > <img class="list_image" :src="user.avatar" alt=""></router-link></td>
                 <td><router-link :to="'user/'+user.id" > {{user.name}}</router-link></td>
+                <td>{{user.type}}</td>
                 <td>{{user.age}}</td>
                 <td>{{user.city}}</td>
                 <td>{{user.country}}</td>
-                <td>{{user.type}}</td>
-                <td>{{user.language}}</td>
+                <td>{{user.communicationWay}}</td>
+                <td>{{user.mobile}}</td>
+                <td v-if="user.knowFrom">{{user.knowFrom | moment("from", true)}}</td>
               </tr>
               </tbody>
             </table>
@@ -71,12 +75,15 @@ export default {
           age:u.val().age,
           language:u.val().language,
           type:u.val().type,
+          mobile:u.val().mobile,
+          knowFrom:u.val().knowFrom,
+          communicationWay:u.val().communicationWay,
         }
         this.userdata.push(data)
       })
     }) 
    
-   
+   console.log(this.userdata)
     // firebese firestore implementation
 /*   db.collection('users').get().then((querySnaphot)=>{
     querySnaphot.forEach((doc)=>{
@@ -120,5 +127,29 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.list_image{
+  width: 40px;
+  height: 40px;
+  margin-top: -0.50rem;
+  margin-bottom: -0.50rem;
 
+}
+.user table{
+  text-align: left;
+  text-transform: capitalize;
+}
+.nav_link{
+    padding: .5rem 1rem;
+    border: 1px solid #ccc;
+    display: inline-block;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    color: #fff;
+    background: #004085;
+    margin-top: 40px;
+}
+.nav_link:hover{
+  background: #2f5a88;;
+  text-decoration: none;
+}
 </style>

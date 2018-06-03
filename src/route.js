@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from './components/home/Home.vue'
+//import Home from './components/home/Home.vue'
 import Profile from './components/home/Profile.vue'
 import EditProfile from './components/home/EditProfile.vue'
 import User from './components/user/User.vue'
@@ -17,8 +17,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home,
+    name: 'profile',
+    component: Profile,
     meta: {
       requiresAuth: true
     }
