@@ -25,9 +25,9 @@
           <div class="or-seperator"><i>or</i></div>
               <p class="text-center">Login with your social media account</p>
               <div class="text-center social-btn">
-                  <a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
-                  <a href="#" class="btn btn-info"><i class="fa fa-twitter"></i>&nbsp; Twitter</a>
-            <a href="#" class="btn btn-danger"><i class="fa fa-google"></i>&nbsp; Google</a>
+                  <a href="#" @click="loginWithFacebook" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
+                  <!-- <a href="#" class="btn btn-info"><i class="fa fa-twitter"></i>&nbsp; Twitter</a> -->
+                  <a href="#" @click="loginWithGoogle"  class="btn btn-danger"><i class="fa fa-google"></i>&nbsp; Google</a>
               </div>
           </form>
           <p class="text-center text-muted small">Don't have an account? <router-link to="/signup" class="nav-link">Sign up here!</router-link> </p>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import {auth} from './../../firebase'
+import {auth, provider,googleProvider} from './../../firebase'
 
 export default {
   name: 'Test',
@@ -52,7 +52,7 @@ export default {
       authenticate: false
     }
   },
-  mounted: function (params) {
+  mounted: function () {
     //  auth.onAuthStateChanged((user)=>{
     //   console.log('state chanhge')
     //   if(!user){
@@ -78,6 +78,55 @@ export default {
       sign.catch(err=>{
         console.log(err)
       })
+    },
+    loginWithFacebook(){
+        console.log('favebook')
+        auth.signInWithPopup(provider).then(function(result) {
+        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+        
+        if(result){
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+            console.log('authenticated as ',user.uid)
+            this.authenticate = true
+            this.$router.push('/')
+            //this.$router.go({path:this.$router.path})
+        }
+        }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+        });
+    },
+    loginWithGoogle(){
+        auth.signInWithPopup(googleProvider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+            if(result){
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                console.log('authenticated as ',user.uid)
+                this.authenticate = true
+                this.$router.push('/')
+                //this.$router.go({path:this.$router.path})
+            }
+        // ...
+        }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+        });
     }
    
 

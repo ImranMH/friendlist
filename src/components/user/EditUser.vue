@@ -230,7 +230,7 @@
                   status:<select v-show="editMood" v-model="singleFriend.status"> 
                     <option value="connected">connected</option>
                     <option value="disconnected">disconnected</option>
-                    <option value="abnbdant">abnbdant</option>
+                    <option value="abandon">abandon</option>
                     <option value="loosely connected">loosely connected</option>
                   </select>
                 <span v-show="displayMood">{{singleFriend.status}} </span> 
@@ -248,10 +248,16 @@
                 <span v-show="displayMood">{{singleFriend.knowFrom}} </span> 
               </div>
             </li>
-              <li class="edit_item">
+            <li class="edit_item">
               <div class="knowFrom">
                 Friendship Break : <input v-show="editMood" v-model="singleFriend.friendshipBreak" type="date" placeholder="Friendship Break">
                 <span v-show="displayMood">{{singleFriend.friendshipBreak}} </span> 
+              </div>
+            </li>
+            <li class="edit_item">
+              <div class="knowFrom">
+                Last Communication : <input v-show="editMood" v-model="singleFriend.lastTalk" type="date" placeholder="last Talk">
+                <span v-show="displayMood">{{singleFriend.lastTalk}} </span> 
               </div>
             </li>
 
@@ -294,7 +300,7 @@ export default {
       currentUser : auth.currentUser,
       showChangePhoto : false,
       friendType: ['Best friend','Childhood friend','Close friend','Love relation','School friend','College friend',
-        'university friend','Educational friend','Business partner','Just friend','Helpful friend','Time pass friend',
+        'university friend','family Member','relatives','Educational friend','Business partner','office colleague','Just friend','Helpful friend','Time pass friend',
         'Corporate friend','Community friend','Friends friend','Facebook friend','WhatsApp friend','Speaky app friend',
         'Local friend','Mobile friend','Online friend'
       ],

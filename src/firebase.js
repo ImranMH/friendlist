@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 // Required for side-effects
-require("firebase/firestore");
+import "firebase/firestore";
 
 // Initialize Firebase
 var config = {
@@ -18,8 +18,14 @@ export const db = firebase.firestore()
 export const auth = firebase.auth()
 // Create a root reference
 export const storageRef = firebase.storage();
+export const provider = new firebase.auth.FacebookAuthProvider();
+export const  googleProvider = new firebase.auth.GoogleAuthProvider();
 
-/* new rule from console */
+
+firebase.auth().languageCode = 'fr_FR';
+//provider.addScope('user_birthday');
+
+/* new rule from console for firestore  */
 const settings = { /* your settings... */
   timestampsInSnapshots: true
 };

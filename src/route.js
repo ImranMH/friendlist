@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-//import Home from './components/home/Home.vue'
+import Home from './components/home/Home.vue'
 import Profile from './components/home/Profile.vue'
 import EditProfile from './components/home/EditProfile.vue'
 import User from './components/user/User.vue'
 import NewUser from './components/user/NewUser.vue'
+import FriendbyType from './components/user/FriendbyType.vue'
 import SingleUser from './components/user/SingleUser.vue'
 import EditUser from './components/user/EditUser.vue'
 import Login from './components/login/index.vue'
@@ -17,8 +18,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'profile',
-    component: Profile,
+    name: 'home',
+    component: Home,
     meta: {
       requiresAuth: true
     }
@@ -49,6 +50,13 @@ const routes = [
     {
     path: '/user/new',
     component: NewUser,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/users/:type',
+    component: FriendbyType,
     meta: {
       requiresAuth: true
     }

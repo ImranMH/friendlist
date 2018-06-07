@@ -1,55 +1,42 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-         <div class="todo">
-          <h1>{{ msg }}</h1>
-          <form @submit.prevent="addUser"> 
-            <input type="number" class="form-control" v-model= "inputdata.title" placeholder="Number" />
-            <input type="text" class="form-control" v-model= "inputdata.name" placeholder="name" />
-            <input type="text" class="form-control" v-model= "inputdata.country" placeholder="Countey" />
-            <input type="text" class="form-control" v-model= "inputdata.city" placeholder="City" />
-            <input type="text" class="form-control" v-model= "inputdata.langudge" placeholder="Langudge" />
-            <input type="text" class="form-control" v-model= "inputdata.type" placeholder="Friend type" />
-            <input type="number" class="form-control" v-model= "inputdata.age" placeholder="age" />
-            <input type="submit" class="btn btn-primary" value ="AddUser">
-          </form>
-          
-          <small>{{inputdata.name}} </small>
+      <div class="col-md-6">
+         <div class="friend_filter_list">
+           <h2>friends with me</h2>
+            <ul class="list-group">
+              <li v-for = "(user,index) in oldFriend" v-bind:key ="index" class=" friend_list">
+                <img :src="user.avatar" alt="">
+                <div class="friend_list_title">
+                  <h3>{{user.name  }}</h3>
+                <small>{{user.type  }}</small>
+                </div>
+                <p class="know_from">{{user.knowFrom | moment('from',"now",true)}}</p>
+                <p class="know_from_2">{{user.knowFrom | moment("MMMM YYYY")}}</p>
+              </li>
+              
+            </ul>
+  
+        </div>
+      </div>
+            <div class="col-md-6">
+         <div class="friend_filter_list">
+           <h2>Lost Friend</h2>
           <ul class="list-group">
-            <li v-for = "(user,index) in users" v-bind:key ="index" class="list-group-item ">{{user}}</li>
+            <li v-for = "(user,index) in friendshipBreak" v-bind:key ="index" class=" friend_list">
+              <img :src="user.avatar" alt="">
+              <div class="friend_list_title">
+               
+               
+                <h3> <router-link :to="'user/'+user.id" > {{user.name}}</router-link></h3>
+                <small> <router-link :to="'users/'+user.type" > {{user.type}}</router-link></small>
+              </div>
+              <p class="know_from">friend for {{user.knowFrom | moment('from',user.friendshipBreak,true)}}</p>
+              <p class="know_from_2">lost from {{user.friendshipBreak | moment("MMMM YYYY")}}</p>
+            </li>
             
           </ul>
-          <div >
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">List</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">City</th>
-                  <th scope="col">Country</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Langudge</th>
-                </tr>
-            </thead>
-              <!-- <Todalist msg="hellow" v-bind:name="user.name" v-bind:country="user.country" v-bind:age="user.age" v-bind:city="user.city" v-bind:status="user.type" v-bind:no="user.title" /> -->
-            <tbody>
-              <tr  v-for = "(user, index ) in userdata " v-bind:key ="index">
-                <td>{{user.title}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.age}}</td>
-                <td>{{user.city}}</td>
-                <td>{{user.country}}</td>
-                <td>{{user.status}}</td>
-                <td>{{user.langudge}}</td>
-              </tr>
-              </tbody>
-            </table>
-          
-          </div>
-            
-
+  
         </div>
       </div>
     </div>
@@ -58,43 +45,81 @@
 </template>
 
 <script>
-import axios from 'axios'
+//import axios from 'axios'
 import {auth,rtdb} from './../../firebase'
 export default {
-  name: 'Todo',
+  name: 'Home',
   props: {
     msg: String
   },
-  created: function () {
-    // `this` points to the vm instance
-    const user = rtdb.ref().child('users')
-    user.on('value',snap=>{
-      console.log(snap.key)
-      this.userdata = snap.val()
-    })
-   
-  },
-  data:()=>{
+  data:function(){
     return {
-      inputdata: {},
+      currentUser : auth.currentUser,
+      inputdata: [],
       users:[
         'Cras justo odio',
         'Dapibus ac facilisis in',
         'Morbi leo risus'
-
       ],
-      userdata: {},
-      
-      userdatas: [
-
-      ]
+      userdata: [],
+      newFriend: [],
+      oldFriend: [],
+      friendshipBreak:[],
+      activeFriend:[],
     }
   },
+  computed: {
+ 
+ 
+  },
+  created: function () {
+      const user = rtdb.ref('users').child(this.currentUser.uid).orderByChild('age')
+       user.on('value',snap=>{
+        
+        this.inputdata = snap.val()
+        for(let item in this.inputdata){
+          let items = this.inputdata[item];
+          items.id = item
+          this.userdata.push(items)
+        }
+        this.userdata.map(friend=>{
+          if(!friend.knowFrom ){
+            return
+          }
+           if(friend.friendshipBreak ){
+            return
+          }
+          this.oldFriend.push(friend)
+        })
+        this.userdata.map(friend=>{
+          if(!friend.friendshipBreak ){
+            return
+          }
+          this.friendshipBreak.push(friend)
+        })
+
+      }) 
+      console.log(this.oldFriend)
+  },
+  mounted:function () {
+    console.log('mounted')
+  },
+  //  beforeUpdate() {
+  //   console.log('before updated') // Logs the counter value every second, before the DOM updates.
+  //   console.log(this.compute) // Logs the counter value every second, before the DOM updates.
+  // },
+  // updated:function () {
+  //   console.log('updated')
+  // },
+//  filters: {
+//   capitalize: function (value) {
+//     if (!value) return ''
+//       value = value.toString()
+//       return value.charAt(0).toUpperCase() + value.slice(1)
+//     }
+//   },
   methods:{
-    // addUser:()=>{
-    //   //this.users.push(this.inputdata)
-    //   console.log(this)
-    // }
+
     addUser(){
       /* var newPostRef = postListRef.push();
       this.userdata.push(this.inputdata) */
@@ -131,9 +156,51 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 0 10px;
+  margin:  0px;
 }
 a {
   color: #42b983;
+}
+.friend_filter_list{
+  border: 1 solid #ccc;
+  background: #9cbbb0;
+}
+.friend_list{
+  display: flex;
+  align-items: left;
+  justify-content: flex-start;
+  padding: 0;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  margin-top: 5px;
+}
+.friend_list img{
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  padding: 2px;
+  text-transform: capitalize;
+}
+.friend_list_title{
+    width: 30%;
+    margin: 0 10px;
+}
+.friend_list_title h3{
+  margin: 0;
+  font-size: 14px;
+ line-height: 16px;
+ text-transform: capitalize;
+
+}
+.friend_list p{
+  margin: 0;
+  padding: 0;
+}
+small{
+  line-height: 15px;
+}
+p.know_from_2{
+  margin: 0 10px;
+  font-size: 15px;
 }
 </style>

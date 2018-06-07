@@ -15,7 +15,7 @@
             
           </div>
           <div class="edit_profile_link">
-            <router-link :to="'/home/'+$route.params.ProfileId+'/edit'" class="nav-link"><i class="fa fa-edit"></i> Edit Profile</router-link>
+            <router-link :to="'/home/'+$route.params.ProfileId+'/edit'" class="nav_link custom_button"><i class="fa fa-edit"></i> Edit Profile</router-link>
             <div class="info">
               <div class="data">{{currentUser.metadata.lastSignInTime | moment("DD MMMM YYYY, h:mm:ss a")}}</div>
               <div class="data">{{currentUser.metadata.creationTime | moment("DD MMMM YYYY")}}</div>
@@ -28,10 +28,10 @@
     <div class="row">
       <div class="col-md-3">        
         <ul class="profile_item" v-if="bestFriend.length > 0">
-           <h2 class="profile_item_title">{{bestFriend[0].type}} </h2>
+           <h2 class="profile_item_title">{{bestFriend[0].type}}  </h2>
           <li v-for ="item of bestFriend" :key="item.name">
             <img :src="item.avatar" :alt="item.name">
-            <h4><td><router-link :to="'user/'+item.id" >{{item.name}}</router-link></td></h4>
+            <h4><td><router-link :to="'/user/'+item.id" >{{item.name}}</router-link></td></h4>
             <h5>{{item.city}}</h5>
             
           </li>          
@@ -84,8 +84,8 @@ export default {
   },
   data:function() {
     return {
-      currentUser : {},
-      profile: [],
+      currentUser : auth.currentUser,
+      //profile: [],
       userdata: [],
       bestFriend:[],
       childhoodFriend:[],
@@ -96,9 +96,11 @@ export default {
     }
   },
   created: function () {
+    console.log("created")
     // `this` points to the vm instance
-    this.currentUser= auth.currentUser
-    const user = rtdb.ref().child('users').child(this.currentUser.uid)
+ 
+    let currentUserId= this.currentUser.uid
+    const user = rtdb.ref().child('users').child(currentUserId)
     user.on('value',snap=>{
         snap.forEach(u=>{
         const data ={
@@ -113,7 +115,10 @@ export default {
         }
         this.userdata.push(data)
       })
+      console.log( this.userdata)
+      
     })
+        
 
   },
   mounted: function () {
@@ -141,6 +146,7 @@ export default {
           }
         });
       }
+      console.log( this.othersFriend)
   },
   methods:{
 

@@ -191,4 +191,29 @@ label,
 :-ms-input-placeholder {
   color: #888;
 }
+
+/* button */
+  .nav_link{
+    padding: .5rem 1rem;
+    border: 1px solid #ccc;
+    display: inline-block;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    color: #fff;
+    background: #004085;
+    margin-top: 40px;
+}
+.nav_link:hover{
+  background: #2f5a88;;
+  text-decoration: none;
+  color: #fff;
+}
+.custom_button{
+  display: block;
+  padding: .5rem 1rem;
+  border: 1px solid;
+  background: #0062cc;
+  color: #fff;
+  display: inline-block;
+}
 </style>

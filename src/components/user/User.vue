@@ -6,8 +6,8 @@
          <div class="user">
            
           <div >
-            <router-link to="/user/new" class="nav_link"><i class="fas fa-plus"></i> addnew</router-link>
-            <table class="table table-striped">
+            <router-link to="/user/new" class="nav_link custom_button"><i class="fas fa-plus"></i> addnew</router-link>
+            <table class="table table-striped table-responsive">
               <thead>
                 <tr>
                   <th scope="col">image</th>
@@ -26,13 +26,13 @@
               <tr  v-for = "user of userdata " v-bind:key ="user.id">
                 <td><router-link :to="'user/'+user.id" > <img class="list_image" :src="user.avatar" alt=""></router-link></td>
                 <td><router-link :to="'user/'+user.id" > {{user.name}}</router-link></td>
-                <td>{{user.type}}</td>
-                <td>{{user.age}}</td>
+                <td><router-link :to="'/users/'+user.type" > {{user.type}}</router-link></td>
+                <td>{{user.dob | moment("from","now", true)||user.age}}</td>
                 <td>{{user.city}}</td>
                 <td>{{user.country}}</td>
                 <td>{{user.communicationWay}}</td>
                 <td>{{user.mobile}}</td>
-                <td v-if="user.knowFrom">{{user.knowFrom | moment("from", true)}}</td>
+                <td v-if="user.knowFrom">{{user.knowFrom | moment("from","now", true)}}</td>
               </tr>
               </tbody>
             </table>
@@ -77,6 +77,7 @@ export default {
           type:u.val().type,
           mobile:u.val().mobile,
           knowFrom:u.val().knowFrom,
+          dob:u.val().dob,
           communicationWay:u.val().communicationWay,
         }
         this.userdata.push(data)
@@ -98,7 +99,9 @@ export default {
    mounted: function () {
       console.log('mounted')
       const cu = auth.currentUser;
-      console.log(cu)
+    },
+  updated(){
+    console.log('updated')
     },
   watch:{
  /*    '$route'(to, from){
@@ -114,12 +117,6 @@ export default {
   },
    methods:{
 
-/*     addUser(){
-
-        let user = this.inputdata
-        let users = rtdb.ref().child('users')
-        users.push(user)
-    } */
   },
 }
 
@@ -138,18 +135,5 @@ export default {
   text-align: left;
   text-transform: capitalize;
 }
-.nav_link{
-    padding: .5rem 1rem;
-    border: 1px solid #ccc;
-    display: inline-block;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    color: #fff;
-    background: #004085;
-    margin-top: 40px;
-}
-.nav_link:hover{
-  background: #2f5a88;;
-  text-decoration: none;
-}
+
 </style>
