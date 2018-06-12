@@ -7,7 +7,7 @@
            
           <div >
             <router-link to="/user/new" class="nav_link custom_button"><i class="fas fa-plus"></i> addnew</router-link>
-            <table class="table table-striped table-responsive">
+            <table class="table  ">
               <thead>
                 <tr>
                   <th scope="col">image</th>
@@ -57,8 +57,6 @@ export default {
 
   },
    created: function () {
-    console.log('created')
-    // realtime database implementation
 
     
     let currentUserId= auth.currentUser.uid
@@ -84,7 +82,6 @@ export default {
       })
     }) 
    
-   console.log(this.userdata)
     // firebese firestore implementation
 /*   db.collection('users').get().then((querySnaphot)=>{
     querySnaphot.forEach((doc)=>{
@@ -97,11 +94,10 @@ export default {
   }) */
   },
    mounted: function () {
-      console.log('mounted')
       const cu = auth.currentUser;
     },
   updated(){
-    console.log('updated')
+
     },
   watch:{
  /*    '$route'(to, from){

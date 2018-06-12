@@ -3,20 +3,74 @@
     <div class="row">
       <div class="col-md-12">
          <div class="friend_filter_list" v-if="categorizeFriends">
-           <h2>{{categorizeFriends[0].type }}</h2>
+           <h2 class="home_title">{{categorizeFriends[0].type }}</h2>
            <small>Total {{categorizeFriends.length}} Friends</small>
-            <ul class="list-group">
+            <table class="info_table table">
+             <thead>
+               <tr class="table_item">
+                 <th>img</th>
+                 <th>Friends</th>
+                 <th>know for</th>
+                 <th>meet</th>
+                 <th>email</th>
+                 <th>mobile</th>
+                 <th>talk In</th>
+                 <th>status</th>
+                 
+               </tr>
+             </thead>
+             <tbody>
+               <tr v-for = "user in categorizeFriends" v-bind:key ="user.id" class=" table_item" >
+                 <td class="avatar">
+                   <img :src="user.avatar" alt="" class="table_avatar">
+                 </td>
+                 <td class="name">
+                   <h3><router-link :to="'/user/'+user.id" > {{user.name}}</router-link></h3>
+                  <small><router-link :to="'/users/'+user.type" > {{user.city}}</router-link></small>
+                 </td>
+                 <td class="duration">
+                   {{user.knowFrom | moment('from',"now",true)}}
+                 </td>
+                 <td class="known">
+                   {{user.knowFrom | moment("MMMM YYYY")}}
+                 </td>
+                 <td>{{user.email}}</td>
+                 <td>{{user.mobile}}</td>
+                 <td>{{user.communicationWay}}</td>
+                 <td>{{user.status}}</td>
+               </tr>
+             </tbody>
+           </table>
+           <!--  <ul class="list-group">
+              <li class=" friend_list">
+                <div>image</div>
+                <div class="friend_list_title">
+                  <h3>naame</h3>
+                </div>
+                <p class="know_from">know From</p>
+                <p class="know_from">first Meet</p>
+                
+                <div>Communaication</div>
+                <div>Mobile</div>
+                <div>Email</div>
+                <div>Status</div>
+              </li>
               <li v-for = "user in categorizeFriends" v-bind:key ="user.id" class=" friend_list">
                 <img :src="user.avatar" alt="">
                 <div class="friend_list_title">
                   <h3>{{user.name  }}</h3>
-                <small>{{user.type  }}</small>
+                  <small v-if="user.subType ">{{user.subType  }}</small>
+                  <small v-else>{{user.city  }}</small>
                 </div>
                 <p class="know_from">{{user.knowFrom | moment('from',"now",true)}}</p>
                 <p class="know_from_2">{{user.knowFrom | moment("MMMM YYYY")}}</p>
+                <div>{{user.communicationWay}}</div>
+                <div>{{user.mobile}}</div>
+                <div>{{user.email}}</div>
+                <div>{{user.status}}</div>
               </li>
               
-            </ul>
+            </ul> -->
   
         </div>
       </div>
@@ -47,7 +101,6 @@ export default {
  
   },
   created: function () {
-      console.log(this.$route.params.type)
       const type = this.$route.params.type
       const user = rtdb.ref('users').child(this.currentUser.uid).orderByChild('age')
        user.on('value',snap=>{
@@ -61,7 +114,6 @@ export default {
         this.userdata.map(friend=>{
           if(friend.type === type ){
             return this.categorizeFriends.push(friend)
-            console.log(this.categorizeFriends)
           }
 
           
@@ -77,7 +129,7 @@ export default {
       
   },
   mounted:function () {
-    console.log('mounted')
+
     console.log(this.$route.params.type)
   },
 
@@ -93,9 +145,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -105,48 +155,50 @@ li {
   margin:  0px;
 }
 a {
-  color: #42b983;
+  color: #28a745;
+}
+.home_title{
+  text-transform: capitalize;
+  font-size: 22px;
+  padding: 10px 0 5px;
+  text-shadow: 1px 1px 2px #000;
 }
 .friend_filter_list{
-  border: 1 solid #ccc;
-  background: #9cbbb0;
+    background: #e9ecef;
+    margin-top: 30px;
 }
-.friend_list{
-  display: flex;
-  align-items: left;
-  justify-content: flex-start;
-  padding: 0;
+.info_table{
   text-align: left;
-  border-bottom: 1px solid #ccc;
-  margin-top: 5px;
-}
-.friend_list img{
-  width: 40px;
-  height: 40px;
-  border: 1px solid #ccc;
-  padding: 2px;
   text-transform: capitalize;
 }
-.friend_list_title{
-    width: 30%;
-    margin: 0 10px;
+.table_item{
+  border:1px solid #ccc;
+  padding: 5px;
 }
-.friend_list_title h3{
-  margin: 0;
-  font-size: 14px;
- line-height: 16px;
- text-transform: capitalize;
+.table_item .avatar{
+  width: 50px;
+  height: 50px;
+}
+.table_item .name h3{
+  font-size: 16px;
+  margin-bottom: 0;
+  line-height: 14px;
+}
+.table_item .duration{
+  
+}
+.table_item .from{
 
 }
-.friend_list p{
-  margin: 0;
-  padding: 0;
+.table_item th{
+   padding: 5px;
+  border:1px solid #ccc;
 }
-small{
-  line-height: 15px;
+.table_avatar{
+  max-width: 100%;
 }
-p.know_from_2{
-  margin: 0 10px;
-  font-size: 15px;
+.info_table td {
+  padding: 5px;
+  border:1px solid #ccc;
 }
 </style>

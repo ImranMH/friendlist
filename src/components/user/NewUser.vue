@@ -11,7 +11,7 @@
               <input v-model= "inputdata.city" placeholder="Friend Place of birth (optional)" type="text" tabindex="2" required>
             </fieldset>
             <fieldset>
-              <input v-model= "inputdata.country" placeholder=" Country (optional)" type="tel" tabindex="3" >
+              <input v-model= "inputdata.country" placeholder=" Country (optional)" type="text" tabindex="3" >
             </fieldset>
             <fieldset>
               <input v-model= "inputdata.mobile" placeholder=" Mobile Number (optional)" type="tel" tabindex="3" >

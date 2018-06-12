@@ -3,25 +3,61 @@
     <div class="row">
       <div class="col-md-6">
          <div class="friend_filter_list">
-           <h2>friends with me</h2>
-            <ul class="list-group">
-              <li v-for = "(user,index) in oldFriend" v-bind:key ="index" class=" friend_list">
-                <img :src="user.avatar" alt="">
-                <div class="friend_list_title">
-                  <h3>{{user.name  }}</h3>
-                <small>{{user.type  }}</small>
+           <h2 class="home_title">friends with me</h2>
+           <table class="info_table table">
+             <thead>
+               <tr class="table_item">
+                 <th>img</th>
+                 <th>Friends</th>
+                 <th>know for</th>
+                 <th>meet</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr v-for = "(user,index) in oldFriend" v-bind:key ="index" class=" table_item" >
+                 <td class="avatar">
+                   <img :src="user.avatar" alt="" class="table_avatar">
+                 </td>
+                 <td class="name">
+                   <h3><router-link :to="'user/'+user.id" > {{user.name}}</router-link></h3>
+                  <small><router-link :to="'users/'+user.type" > {{user.type}}</router-link></small>
+                 </td>
+                 <td class="duration">
+                   {{user.knowFrom | moment('from',"now",true)}}
+                 </td>
+                 <td class="known">
+                   {{user.knowFrom | moment("MMMM YYYY")}}
+                 </td>
+               </tr>
+             </tbody>
+           </table>
+            <!-- <ul class="list-group">
+              <li class=" friend_list">
+                <h5 class="list_item"> user </h5>
+                <div class="friend_list_title list_item">
+                  <h3>Friend</h3>
+                
                 </div>
-                <p class="know_from">{{user.knowFrom | moment('from',"now",true)}}</p>
-                <p class="know_from_2">{{user.knowFrom | moment("MMMM YYYY")}}</p>
+                <p class="list_item">Missing Since</p>
+                <p class="list_item">Lost From</p>
+              </li>
+              <li v-for = "(user,index) in oldFriend" v-bind:key ="index" class=" friend_list">
+                <img :src="user.avatar" alt="" class="list_item">
+                <div class="friend_list_title list_item">
+                  <h3>{{user.name  }}</h3>
+                  <small>{{user.type  }}</small>
+                </div>
+                <p class="list_item">{{user.knowFrom | moment('from',"now",true)}}</p>
+                <p class="list_item">{{user.knowFrom | moment("MMMM YYYY")}}</p>
               </li>
               
-            </ul>
+            </ul> -->
   
         </div>
       </div>
-            <div class="col-md-6">
+      <div class="col-md-6">
          <div class="friend_filter_list">
-           <h2>Lost Friend</h2>
+           <h2 class="home_title">Lost Friend</h2>
           <ul class="list-group">
             <li v-for = "(user,index) in friendshipBreak" v-bind:key ="index" class=" friend_list">
               <img :src="user.avatar" alt="">
@@ -69,7 +105,7 @@ export default {
     }
   },
   computed: {
- 
+    
  
   },
   created: function () {
@@ -96,6 +132,7 @@ export default {
             return
           }
           this.friendshipBreak.push(friend)
+          //this.friendshipBreak.sort(friend.age)
         })
 
       }) 
@@ -111,13 +148,14 @@ export default {
   // updated:function () {
   //   console.log('updated')
   // },
-//  filters: {
-//   capitalize: function (value) {
-//     if (!value) return ''
-//       value = value.toString()
-//       return value.charAt(0).toUpperCase() + value.slice(1)
-//     }
-//   },
+ filters: {
+  listFilter: function (value) {
+    if (!value) return ''
+      this.value.filter((item)=>{
+
+      })
+    }
+  },
   methods:{
 
     addUser(){
@@ -148,7 +186,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
-  margin: 40px 0 0;
+  /* margin: 40px 0 0; */
 }
 ul {
   list-style-type: none;
@@ -159,17 +197,25 @@ li {
   margin:  0px;
 }
 a {
-  color: #42b983;
+  color: #28a745;
+}
+a:hover{
+  text-decoration: none;
+  color: #5d8bbd;;
 }
 .friend_filter_list{
-  border: 1 solid #ccc;
-  background: #9cbbb0;
+  border: 1px solid #ccc;
+  background: #555;
+  color:#fff;
+}
+.list-group{
+  padding: 3px 0px 0px 3px;
 }
 .friend_list{
   display: flex;
   align-items: left;
   justify-content: flex-start;
-  padding: 0;
+  
   text-align: left;
   border-bottom: 1px solid #ccc;
   margin-top: 5px;
@@ -178,7 +224,6 @@ a {
   width: 40px;
   height: 40px;
   border: 1px solid #ccc;
-  padding: 2px;
   text-transform: capitalize;
 }
 .friend_list_title{
@@ -202,5 +247,48 @@ small{
 p.know_from_2{
   margin: 0 10px;
   font-size: 15px;
+}
+.list_item{
+  border: 1px solid #ccc;
+}
+.home_title{
+  text-transform: capitalize;
+  font-size: 22px;
+  padding: 10px 0 5px;
+  text-shadow: 1px 1px 2px #000;
+}
+.info_table{
+  text-align: left;
+  text-transform: capitalize;
+}
+.table_item{
+  border:1px solid #ccc;
+  padding: 5px;
+}
+.table_item .avatar{
+  width: 50px;
+  height: 50px;
+}
+.table_item .name h3{
+  font-size: 16px;
+  margin-bottom: 0;
+  line-height: 14px;
+}
+.table_item .duration{
+  
+}
+.table_item .from{
+
+}
+.table_item th{
+   padding: 5px;
+  border:1px solid #ccc;
+}
+.table_avatar{
+  max-width: 100%;
+}
+.info_table td {
+  padding: 5px;
+  border:1px solid #ccc;
 }
 </style>

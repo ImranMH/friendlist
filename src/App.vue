@@ -216,4 +216,106 @@ label,
   color: #fff;
   display: inline-block;
 }
+
+
+ /* edit profile.vue css */
+ .profile_top{
+    border: 1px solid rgb(105, 103, 103);
+    background: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.block_home_top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.meta{
+  margin-left: 20px;
+    text-align: left;
+    text-transform: capitalize;
+    color: #777;
+}
+.profile_item{
+  background: #555;
+  color:#fff;
+  text-align: left;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+.profile_item li{
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+}
+.profile_item_title{
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+  text-transform: uppercase;
+  border-bottom: 3px solid #9a9a90;
+  padding-bottom: 5px;
+}
+.profile_item h4{
+  font-size: 14px;
+  padding-top: 7px;
+  margin-bottom: 3px;
+  text-transform: capitalize;
+}
+.profile_item h5{
+  font-size: 12px;
+  text-transform: capitalize;
+}
+.profile_photo{
+  width: 200px;
+  height: 200px;
+  float: left;
+  margin: 5px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  padding: 2px;
+}
+.profile_photo img{
+  max-width: 100%; 
+}
+/* input from css */
+/* @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 12px;
+  line-height: 30px;
+  
+}
+
+
+
+::-webkit-input-placeholder {
+  color: #888;
+}
+
+:-moz-placeholder {
+  color: #888;
+}
+
+::-moz-placeholder {
+  color: #888;
+}
+
+:-ms-input-placeholder {
+  color: #888;
+} */
 </style>

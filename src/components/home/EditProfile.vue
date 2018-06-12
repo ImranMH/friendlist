@@ -18,8 +18,10 @@
                 <div class="text-center">
                   <input style="display:none" ref="selectImage" class ="form-control"  type="file" v-on:change ="onFileSelected" >
                   <!-- <button @click="$refs.selectImage.click()"> change Image </button> -->
+                  <div class="profile_photo">
+                    <img  @click="$refs.selectImage.click()" :src="currentUser.photoURL" class="avatar img-circle" alt="avatar">
+                  </div>
                   
-                  <img style="width:100px" @click="$refs.selectImage.click()" :src="currentUser.photoURL" class="avatar img-circle" alt="avatar">
                   <h6>Change Profile photo</h6>
                   <input class= "btn btn-primary" v-if="showChangePhoto" @click="changePhoto" value="Change Photo" >
                   
@@ -33,25 +35,25 @@
                 <form class="form-horizontal" @submit.prevent="updateProfile" role="form">
                   <div class="form-group">
                     <label class="col-md-3 control-label">First name:</label>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                       <input class="form-control" v-model="user.firstName" type="text" >
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-lg-3 control-label">Last name:</label>
-                    <div class="col-lg-8">
+                    <div class="col-lg-6">
                       <input class="form-control" v-model="user.lastName"  type="text" >
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-3 control-label">Mobile No:</label>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                       <input class="form-control" v-model="user.mobile" type="number">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-3 control-label"></label>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                       <input type="submit" class="btn btn-primary" value="Save Changes">
                       <span></span>
                       <input type="reset" class="btn btn-default" value="Cancel">
@@ -107,13 +109,13 @@ export default {
     }
   },
   created: function(){
-    console.log('created')
+
   },
   mounted: function () {
     console.log(this.currentUser)
     if (this.currentUser != null) {
         this.currentUser.providerData.forEach(function (profile) {
-          console.log( profile);
+         
         });
       }
   },

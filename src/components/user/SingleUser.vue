@@ -11,11 +11,12 @@
       <div class="col-md-9">
          <div class="friend_upper_block">
             <div class="singleFriend_title">
-              <h1>{{singleFriend.name}} </h1>
+              <div class="friend_status_color" :class="status_indicator_color">{{singleFriend.status}}</div>
+              <h1>{{singleFriend.name}} <span class="friend_status_indicator" :class="status_indicator_color"></span> </h1>
               <small><router-link :to="'/users/'+singleFriend.type" > {{singleFriend.type}}</router-link> </small> 
             </div>           
             <div class="edit_profile_link">
-              <router-link :to="'/user/'+$route.params.id+'/edit'" class="nav_link custom_button"><i class="fa fa-edit"></i> Edit Profile</router-link>
+              <router-link :to="'/user/'+$route.params.id+'/edit'" class="nav_link custom_button"><i class="fa fa-cog"></i> Profile setting</router-link>
             </div>
         </div> 
         <div class="row" >
@@ -41,9 +42,10 @@
             <div class="info_block">
               <h3>Friendship Duration</h3>
                <strong>{{singleFriend.friendshipBreak | moment('from',singleFriend.knowFrom, true)}}</strong>
+               <div>{{singleFriend.knowFrom | moment('YYYY')}} - {{singleFriend.friendshipBreak | moment('YYYY')}}</div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4" v-if="singleFriend.knowFrom">
             <div class="info_block">
               <h3>first Meet</h3>
               <strong>{{singleFriend.knowFrom | moment('YYYY')}}</strong>
@@ -145,19 +147,29 @@
     </div>
     <div class="row">
       <div class="col-md-12">
+        <h4 class="site-heading">Social profile Link</h4>
         <div class="friend_social">
           <ul class="social_list">
-            <li>
-              <a :href="singleFriend.facebook" ><i class="fa fa-facebook"></i></a>
+            <li @mouseover="showLink" v-if= "singleFriend.facebook">
+              <a :href="singleFriend.facebook" target="_blank"><i class="fa fa-facebook"></i></a>
             </li>
-            <li>
-              <a v-bind:href ="singleFriend.twitter"><i class="fa fa-twitter"></i></a>
+            <li  v-if= "singleFriend.twitter">
+              <a v-bind:href ="singleFriend.twitter" target="_blank"><i class="fa fa-twitter"></i></a>
             </li>
-            <li>
-              <a :href="singleFriend.instagram"><i class="fa fa-instagram"></i></a>
+            <li  v-if= "singleFriend.instagram">
+              <a :href="singleFriend.instagram" target="_blank"><i class="fa fa-instagram"></i></a>
             </li>
-            <li>
+            <li  v-if= "singleFriend.linkedIn" target="_blank">
+              <a :href="singleFriend.linkedIn"><i class="fa fa-linkedin-in"></i></a>
+            </li>
+            <li  v-if= "singleFriend.skype" target="_blank">
               <a :href="singleFriend.skype"><i class="fa fa-skype"></i></a>
+            </li>
+            <li  v-if= "singleFriend.google_plus" target="_blank">
+              <a :href="singleFriend.google_plus"><i class="fa fa-google-plus-g"></i></a>
+            </li>
+            <li  v-if= "singleFriend.musically" target="_blank">
+              <a :href="singleFriend.musically"><i class="fa fa-music"></i></a>
             </li>
           </ul>
         </div>
@@ -188,8 +200,24 @@ export default {
         }
  
       })
-     console.log(this.singleFriend)
     })
+    switch (this.singleFriend.status) {
+      case 'connected':
+        this.status_indicator_color = 'green'
+        break;
+        case 'loosely connected':
+        this.status_indicator_color = 'gray'
+        break;
+        case 'disconnected':
+        this.status_indicator_color = 'yellow'
+        break;
+        case 'abandon':
+        this.status_indicator_color = 'red'
+        break;
+      default:
+        this.status_indicator_color = 'gray'
+        break;
+    }
   },
   watch:{
  /*    '$route'(to, from){
@@ -199,12 +227,14 @@ export default {
   data(){
     return{
       inputdata: {},
-      singleFriend: {}
+      singleFriend: {},
+      status_indicator_color: null
     }
   },
    methods:{
 
-    addUser(){
+    showLink(){
+      console.log('show Link')
     }
   },
 }
@@ -230,6 +260,9 @@ export default {
   }
   .user_info{
     font-size: 15px
+  }
+  .friend_status_color{
+   text-shadow: 0px 1px 3px #000;
   }
   .single_user_top_container{
     display: flex;
@@ -266,9 +299,8 @@ export default {
   }
   .singleFriend_title{
     color: #fff;
-    padding: 5px 10px;
     float: left;
-    width: 70%;
+    /* width: 70%; */
   }
   .singleFriend_title h1{
     text-transform: capitalize;
@@ -288,12 +320,27 @@ export default {
     text-align: right;
     min-width: 150px;
   }
+  .friend_status_indicator{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    color: #f8f9fa;
+    display: inline-block;
+    background: #fff;
+    margin-bottom: 3px;
+  }
+  .friend_status_color{
+    font-size: 12px;
+    padding: 5px;
+    display: inline-block;
+    line-height: 10px;
+  }
   .avatar{
-    max-width: 100%;
-    max-height: 100%;
-    height: 200px;
+    width: 100%;
+    height: 100%;
+    /* height: 200px; */
     margin-top: 20px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     padding: 5px;
   }
   .avatar img{
@@ -322,5 +369,17 @@ export default {
   .social_list a:hover{
      background: #fff;
 
+  }
+  .green{
+    background: green;
+  }
+  .gray{
+    background: gray;
+  }
+  .yellow{
+    background: yellow;
+  }
+  .red{
+    background: red;
   }
 </style>
