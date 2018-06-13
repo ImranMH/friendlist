@@ -256,6 +256,9 @@ label,
   border-bottom: 3px solid #9a9a90;
   padding-bottom: 5px;
 }
+.container{
+  background: #212529;
+}
 .profile_item h4{
   font-size: 14px;
   padding-top: 7px;
@@ -277,6 +280,11 @@ label,
 }
 .profile_photo img{
   max-width: 100%; 
+}
+.site-heading{
+  color: #fff;
+  padding: 15px;
+  text-transform: capitalize;
 }
 /* input from css */
 /* @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);

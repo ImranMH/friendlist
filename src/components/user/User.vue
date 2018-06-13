@@ -7,7 +7,7 @@
            
           <div >
             <router-link to="/user/new" class="nav_link custom_button"><i class="fas fa-plus"></i> addnew</router-link>
-            <table class="table  ">
+            <table >
               <thead>
                 <tr>
                   <th scope="col">image</th>
@@ -23,7 +23,7 @@
             </thead>
               <!-- <Todalist msg="hellow" v-bind:name="user.name" v-bind:country="user.country" v-bind:age="user.age" v-bind:city="user.city" v-bind:status="user.type" v-bind:no="user.title" /> -->
             <tbody>
-              <tr  v-for = "user of userdata " v-bind:key ="user.id">
+              <tr  v-for = "user of orderFriends " v-bind:key ="user.id">
                 <td><router-link :to="'user/'+user.id" > <img class="list_image" :src="user.avatar" alt=""></router-link></td>
                 <td><router-link :to="'user/'+user.id" > {{user.name}}</router-link></td>
                 <td><router-link :to="'/users/'+user.type" > {{user.type}}</router-link></td>
@@ -51,6 +51,8 @@
 import axios from 'axios'
 import {rtdb} from './../../firebase'
 import {auth, db} from './../../firebase'
+import _ from 'lodash'
+
 export default {
   name: 'User',
   props: {
@@ -96,9 +98,6 @@ export default {
    mounted: function () {
       const cu = auth.currentUser;
     },
-  updated(){
-
-    },
   watch:{
  /*    '$route'(to, from){
       alert(to.params.id)
@@ -109,6 +108,11 @@ export default {
       inputdata: {},
       cu : null,
       userdata: []
+    }
+  },
+  computed:{
+    orderFriends:function () {
+      return _.orderBy(this.userdata,'name')
     }
   },
    methods:{
@@ -122,14 +126,24 @@ export default {
 <style scoped>
 .list_image{
   width: 40px;
-  height: 40px;
+  height: 29px;
   margin-top: -0.50rem;
   margin-bottom: -0.50rem;
+  max-width: 100%;
 
 }
 .user table{
   text-align: left;
   text-transform: capitalize;
+}
+tbody,thead{
+  color: #fff;
+}
+tr{
+  border: 1px solid #555;
+}
+td,th{
+  padding-right: 4px;
 }
 
 </style>

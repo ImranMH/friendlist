@@ -176,7 +176,7 @@
     </div>
     <div class="row">
       
-      
+     
     </div>
     <div class="row">
       <div class="col-md-12">
@@ -189,7 +189,8 @@
         </div>
       </div>
     </div>
-      
+       <!-- <singleItem :mood="editMood" :dm="displayMood" :data="singleFriend.data" />
+       <singleItem :mood="editMood" :dm="displayMood" :data="singleFriend.age" type="number" /> -->
   </div>
 </div>
  
@@ -199,6 +200,7 @@
 <script>
 //import axios from 'axios'
 import {auth,rtdb,storageRef, db} from './../../firebase'
+import singleItem from './singleItem'
 export default {
   name: 'EditUser',
   props: {
@@ -242,7 +244,9 @@ export default {
       alert(to.params.id)
     } */
   },
-
+  components:{
+    singleItem
+  },
    methods:{
 
     showEdit(e){

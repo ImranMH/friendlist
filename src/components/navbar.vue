@@ -18,8 +18,8 @@
                      
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
-                      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                      <input class="form-control mr-sm-2" v-model="queryFriend" type="text" placeholder="Search">
+                      <button @click.prevent="searchFriend" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                   </form>
                   <ul class="navbar-nav mr-auto mt-2 mt-lg-0 navbar-right" >
                     <li class=" nav-item" v-show="!isLoggedIn" >
@@ -36,12 +36,37 @@
             </nav>
           </div>
         </div>
+        <div class="row" v-if="searched">
+           
+            <div class="col-md-12">
+                <ul class="profile_item" v-if="queryResult.length > 0" >
+                
+                    <h2 class="profile_item_title"> search result </h2>
+                    <li v-for ="item of queryResult" :key="item.name">
+                        <div class="avatar">
+                           <img :src="item.avatar" :alt="item.name">  
+                        </div>
+                       
+                        <h4><router-link :to="'/user/'+item.id" >{{item.name}}</router-link></h4>
+                        <h5 ><router-link :to="'/users/'+item.type" >{{item.type}}</router-link></h5>
+                        <h5 v-if="item.subType">{{item.subType}}</h5>    
+                        <h5>{{item.city}}</h5>
+                        
+                    </li>
+                        
+                </ul>
+                <div class="profile_item" v-else >
+                    <h2 class="profile_item_title"> search result </h2>
+                    <p class="no_data">no data found</p>
+                </div>
+            </div>
+        </div>
       </div>
 
 </template>
 
 <script>
-import {auth} from './../firebase'
+import {auth,rtdb} from './../firebase'
 export default {
   name: 'Navbar',
   props: {
@@ -49,7 +74,10 @@ export default {
   data(){
     return{
         currentUser: auth.currentUser,
-        isLoggedIn: false
+        isLoggedIn: false,
+        queryFriend: '',
+        queryResult:[],
+        searched: false
     }
   },
   created: function () {
@@ -59,12 +87,35 @@ export default {
           this.isLoggedIn= false
       }
   },
+
   methods:{
     logout: function() {        
         auth.signOut().then(e=>{
         this.$router.push('/login')
     })
-    }
+    },
+    searchFriend(){
+        let self = this
+        this.queryResult = []
+        let serachResult= rtdb.ref('users').child(this.currentUser.uid).orderByChild('name').equalTo(this.queryFriend)
+        serachResult.once('value', (snapshot)=>{
+            //this.searched = false
+            snapshot.forEach(friend=>{
+                const friends={
+                    id:friend.key,
+                    name:friend.val().name,
+                    type: friend.val().type,
+                    subType: friend.val().subType,
+                    city: friend.val().city,
+                    avatar: friend.val().avatar
+                }
+                this.queryResult.push(friends)
+               
+            })
+            //console.log(snapshot.val())
+        })
+         this.searched = true
+    },
   }
 }
 
@@ -72,5 +123,76 @@ export default {
 
 
 <style scoped>
+.profile_top{
+    border: 1px solid rgb(105, 103, 103);
+    background: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.block_home_top{
+  display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.meta{
+  margin-left: 20px;
+    text-align: left;
+    text-transform: capitalize;
+    color: #777;
+}
+.profile_item{
+  background: #555;
+  color:#fff;
+  text-align: left;
+  overflow: hidden;
+  margin-bottom: 25px;
+  margin-top: 30px;
+}
+.profile_item li{
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+}
 
+.profile_item_title{
+  font-size: 18px;
+  text-align: center;
+  margin-top: 10px;
+  text-transform: uppercase;
+  border-bottom: 3px solid #9a9a90;
+  padding-bottom: 5px;
+}
+.profile_item h4{
+  font-size: 16px;
+  padding-top: 7px;
+  margin-bottom: 3px;
+  text-transform: capitalize;
+}
+.profile_item h5{
+  font-size: 14px;
+  text-transform: capitalize;
+}
+.avatar{
+    max-width: 100%;
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin: 5px;
+    margin-right: 30px;
+}
+.profile_item img{
+  max-width: 100%;
+  border: 1px solid #ccc;
+  width: 70px;
+  height: 70px;
+}
+.no_data{
+    padding: 20px;
+    background: #555;
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+    text-transform: capitalize;
+}
 </style>
+

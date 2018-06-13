@@ -108,9 +108,7 @@ export default {
       showChangePhoto : false
     }
   },
-  created: function(){
 
-  },
   mounted: function () {
     console.log(this.currentUser)
     if (this.currentUser != null) {

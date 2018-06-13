@@ -14,7 +14,7 @@
                </tr>
              </thead>
              <tbody>
-               <tr v-for = "(user,index) in oldFriend" v-bind:key ="index" class=" table_item" >
+               <tr v-for = "(user,index) in orderFriendsByKnownFrom" v-bind:key ="index" class=" table_item" >
                  <td class="avatar">
                    <img :src="user.avatar" alt="" class="table_avatar">
                  </td>
@@ -136,24 +136,22 @@ export default {
         })
 
       }) 
-      console.log(this.oldFriend)
   },
   mounted:function () {
     console.log('mounted')
   },
-  //  beforeUpdate() {
-  //   console.log('before updated') // Logs the counter value every second, before the DOM updates.
-  //   console.log(this.compute) // Logs the counter value every second, before the DOM updates.
-  // },
-  // updated:function () {
-  //   console.log('updated')
-  // },
+
  filters: {
   listFilter: function (value) {
     if (!value) return ''
       this.value.filter((item)=>{
 
       })
+    }
+  },
+  computed:{
+    orderFriendsByKnownFrom:function () {
+      return _.orderBy(this.oldFriend,'knowFrom','desc')
     }
   },
   methods:{
@@ -164,17 +162,6 @@ export default {
       let user = this.inputdata
         let users = rtdb.ref().child('users')
         users.push(user)
-    //     users.set({
-    //    name:user.name,
-    //    age:user.age,
-    //    city:user.city,
-    //    country:user.country,
-    //  })
-     console.log(users)
-     
-
-     console.log(this.userdata)
-      //this.inputdata = ""
     }
   },
   components:{
