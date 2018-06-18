@@ -1,7 +1,7 @@
 <template>
 <div class="singleFriend">
     
-   <div class="container ">
+   <div class="container-fluid ">
     <div class="row ">
       <div class="col-md-3">       
         <div class="avatar">
@@ -83,7 +83,7 @@
        <div class="col-md-3">
         <div class="info_block">
           <h3>Email :</h3>
-          <strong>{{singleFriend.email || '---' }}</strong>
+          <strong class="email">{{singleFriend.email || '---' }}</strong>
         </div>
       </div>
     </div>
@@ -288,14 +288,20 @@ export default {
     background: #555;
     color: #fff;
     padding: 10px 5px;
+    text-transform: capitalize;
   }
   .info_block h3{
     margin: 0px 0;
-    font-size: 15px;
+    font-size: 12px;
     text-transform: uppercase;
   }
    .info_block strong{
     font-size: 20px;
+    letter-spacing: 2px;
+  }
+   .info_block strong.email{
+    font-size: 14px;
+    text-transform: lowercase;
   }
   .singleFriend_title{
     color: #fff;

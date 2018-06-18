@@ -1,7 +1,7 @@
 <template>
 <div class="singleFriend">
 
-  <div class="container ">
+  <div class="container-fluid ">
     <div class="row" v-if="message">
       <div class="col-md-12">
         <div class="alert alert-info alert-dismissable">
@@ -70,7 +70,7 @@
               </li>
                 <li class="edit_item">
                 <div class="mobile">
-                    mobile:<input v-show="editMood" v-model="singleFriend.mobile" type="number" placeholder="mobile">
+                    mobile:<input v-show="editMood" v-model="singleFriend.mobile" type="tel" placeholder="mobile">
                   <span v-show="displayMood">{{singleFriend.mobile}} </span> 
                 </div>
               </li>
@@ -218,7 +218,7 @@ export default {
       showChangePhoto : false,
       friendType: ['Best friend','Childhood friend','Close friend','Love relation','School friend','College friend',
         'university friend','family Member','relatives','Educational friend','Business partner','office colleague','Just friend','Helpful friend','Time pass friend',
-        'Corporate friend','Community friend','Friends friend','Facebook friend','WhatsApp friend','Speaky app friend',
+        'Corporate friend','Community friend','Friends friend','student',' teacher','Facebook friend','WhatsApp friend','Speaky app friend',
         'Local friend','Mobile friend','Online friend'
       ],
       socialAcounts: ['facebook', 'twitter', 'instagram', 'whatsApp','linkedIn','skype','google_plus','musically']

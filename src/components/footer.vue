@@ -1,10 +1,10 @@
 <template>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
 			  <footer class="footer-basic-centered">
 
-					<p class="footer-company-motto">The company motto.</p>
+					<p class="footer-company-motto">keep Your friens activities alive</p>
 
 					<p class="footer-links">
 						<a href="#">Home</a>
@@ -15,7 +15,7 @@
 						<a href="#">Contact</a>
 					</p>
 
-					<p class="footer-company-name">Company Name &copy; 2015</p>
+					<p class="footer-company-name">Friendlist &copy; 2015</p>
 
 				</footer>
 			</div>
@@ -93,7 +93,15 @@ export default {
 }
 
 /* If you don't want the footer to be responsive, remove these media queries */
-
+.footer-links{
+	padding: 10px 0;
+}
+.footer-links a{
+	padding: 0px 10px;
+}
+.footer-links a:hover{
+	color: #555;
+}
 @media (max-width: 600px) {
 
 	.footer-basic-centered{

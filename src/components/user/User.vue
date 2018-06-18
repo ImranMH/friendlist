@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       {{cu}}
       <div class="col-md-12">
@@ -16,9 +16,9 @@
                   <th scope="col">Age</th>
                   <th scope="col">City</th>
                   <th scope="col">Country</th>
-                  <th scope="col">Status</th>
+                  <th scope="col">Contact</th>
                   <th scope="col">Mobile</th>
-                  <th scope="col">Know For</th>
+                  <th class="" scope="col">Know For</th>
                 </tr>
             </thead>
               <!-- <Todalist msg="hellow" v-bind:name="user.name" v-bind:country="user.country" v-bind:age="user.age" v-bind:city="user.city" v-bind:status="user.type" v-bind:no="user.title" /> -->
@@ -135,6 +135,7 @@ export default {
 .user table{
   text-align: left;
   text-transform: capitalize;
+  margin: 0 auto;
 }
 tbody,thead{
   color: #fff;

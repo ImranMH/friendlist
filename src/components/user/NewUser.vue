@@ -54,7 +54,7 @@ export default {
       user: {},
       friendType: ['Best friend','Childhood friend','Close friend','Love relation','School friend','College friend',
         'university friend','Educational friend','family Member','relatives','Business partner','office colleague','Just friend','Helpful friend','Time pass friend',
-        'Corporate friend','Community friend','Friends friend','Facebook friend','WhatsApp friend','Speaky app friend',
+        'Corporate friend','Community friend','student',' teacher','Friends friend','Facebook friend','WhatsApp friend','Speaky app friend',
         'Local friend','Mobile friend','Online friend'
       ],
     }

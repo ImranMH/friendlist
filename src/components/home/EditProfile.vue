@@ -2,7 +2,7 @@
       <div class="editProfile">
         <h2>Edit profile</h2>
         
-         <div class="container ">
+         <div class="container-fluid ">
             <div class="row">
               <div class="col-md-12">
                 <div class="alert alert-info alert-dismissable">

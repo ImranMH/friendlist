@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-6">
          <div class="friend_filter_list">
@@ -183,17 +183,14 @@ li {
   display: inline-block;
   margin:  0px;
 }
-a {
-  color: #28a745;
-}
-a:hover{
-  text-decoration: none;
-  color: #5d8bbd;;
-}
+
 .friend_filter_list{
   border: 1px solid #ccc;
-  background: #555;
+  background: #212529;
   color:#fff;
+  margin-top: 50px;
+  border-bottom: none;
+
 }
 .list-group{
   padding: 3px 0px 0px 3px;

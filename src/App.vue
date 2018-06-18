@@ -256,7 +256,7 @@ label,
   border-bottom: 3px solid #9a9a90;
   padding-bottom: 5px;
 }
-.container{
+.container-fluid{
   background: #212529;
 }
 .profile_item h4{
@@ -285,6 +285,21 @@ label,
   color: #fff;
   padding: 15px;
   text-transform: capitalize;
+}
+.user .site-heading{
+  color: #555;
+  padding: 0;
+
+}
+h3 a {
+  color: #0056b3;
+}
+strong a {
+  color: #28a745;
+}
+a:hover{
+  text-decoration: none;
+  color: #5d8bbd;;
 }
 /* input from css */
 /* @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
