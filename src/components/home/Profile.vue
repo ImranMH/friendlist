@@ -1,42 +1,48 @@
 <template>
-  <div class="container-fluid">
-    
-    <div class="row ">
-      <div class="col-md-12">
-        <div class="profile_top">
-          <div class=" block_home_top">
-            <div class="profile_photo">
-              <img :src="currentUser.photoURL" alt="">
+  <div class="profile">
+    <div class="container-fluid light">
+      
+      <div class="row ">
+            <div class="col-sm-8">
+              <div class="">
+                <div class="profile_photo">
+                  <img :src="currentUser.photoURL" alt="">
+                </div>
+                <div class="meta">
+                  
+                  <h3>{{currentUser.displayName}}</h3>
+                  <h5>{{currentUser.email}}</h5>
+                  <small>Total Friend {{userdata.length}}</small>
+                </div>
+                            
+              </div>
             </div>
-            <div class="meta">
-              
-              <h3>{{currentUser.displayName}}</h3>
-              <h5>{{currentUser.email}}</h5>
-              <small>Total Friend {{userdata.length}}</small>
+            <div class="col-sm-4">
+              <div class="edit_profile_link">
+                <router-link :to="'/home/'+$route.params.ProfileId+'/edit'" class="nav_link custom_button"><i class="fa fa-edit"></i> Edit Profile</router-link>
+                <div class="info">
+                  <div class="data"> <strong>Join At : </strong> {{currentUser.metadata.creationTime | moment(" MMMM YYYY")}}</div>
+                  <div><strong>last Login</strong></div>
+                  <div class="data">{{currentUser.metadata.lastSignInTime | moment("DD MMMM YY")}} Time:{{currentUser.metadata.lastSignInTime | moment(" h:mm:ss a")}}</div>
+                  <div class="data"></div>
+                  
+                </div>
+              </div>
             </div>
-            
-            
-          </div>
-          <div class="edit_profile_link">
-            <router-link :to="'/home/'+$route.params.ProfileId+'/edit'" class="nav_link custom_button"><i class="fa fa-edit"></i> Edit Profile</router-link>
-            <div class="info">
-              <div class="data">{{currentUser.metadata.lastSignInTime | moment("DD MMMM YYYY, h:mm:ss a")}}</div>
-              <div class="data">{{currentUser.metadata.creationTime | moment("DD MMMM YYYY")}}</div>
-            </div>
-          </div>
-        </div> 
-        
       </div>
     </div>
-    <div class="row">
-      <ProfileItem :items="bestFriend"/>
-      <profile-item :items="onlineFriend"/>
-      <profile-item :items="childhoodFriend"/>
-      <profile-item :items="relatives"/>
-      <profile-item :items="familyMember"/>
-      <profile-item :items="schoolFriend"/>
-      <profile-item :items="collegeFriend"/>
-      <profile-item :items="othersFriend"/>
+    <div class="container-fluid">
+      <div class="row">
+        <ProfileItem :items="bestFriend"/>
+        <profile-item :items="onlineFriend"/>
+        <profile-item :items="childhoodFriend"/>
+        <profile-item :items="relatives"/>
+        <profile-item :items="familyMember"/>
+        <profile-item :items="schoolFriend"/>
+        <profile-item :items="collegeFriend"/>
+        <profile-item :items="othersFriend"/>
+        </div>
+    </div>
       <!-- <div class="col-md-3 col-sm-6" v-if="bestFriend.length > 0">        
         <ul class="profile_item" >
            <h2 class="profile_item_title">{{bestFriend[0].type}}  </h2>
@@ -102,9 +108,8 @@
           </li>          
         </ul>
       </div> -->
-    </div>
-  </div>
- 
+
+ </div>
 </template>
 
 <script>
@@ -200,14 +205,14 @@ export default {
 .profile_top{
     border: 1px solid rgb(105, 103, 103);
     background: #e9ecef;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; */
 }
 .block_home_top{
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; */
 }
 .meta{
   margin-left: 20px;
@@ -221,6 +226,12 @@ export default {
   text-align: left;
   overflow: hidden;
   margin-bottom: 25px;
+}
+.col-md-9.personal-info {
+    background: #ccc;
+    padding: 20px;
+    margin-right: 0px;
+
 }
 .profile_item li{
   overflow: hidden;
@@ -255,5 +266,27 @@ export default {
 }
 .profile_photo img{
   max-width: 100%; 
+}
+.edit_profile_link{
+  margin-right: 10px;
+}
+.info{
+  padding: 5px;
+    background: #555;
+    /* margin-right: 10px; */
+    padding-right: 10px;
+    color: #fff;
+}
+.light{
+  background: #ccc;
+}
+.info{
+  margin-bottom: 20px;
+}
+@media(max-width:600px){
+  .meta h5{
+    font-size: 14px
+  }
+
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
       <div class="editProfile">
-        <h2>Edit profile</h2>
+        
         
          <div class="container-fluid ">
             <div class="row">
@@ -13,9 +13,11 @@
               </div>
               
             </div>
+              <h2>Edit profile</h2>
             <div class="row">
+
               <div class="col-md-3">
-                <div class="text-center">
+                <div class="text-center profile_photo_con">
                   <input style="display:none" ref="selectImage" class ="form-control"  type="file" v-on:change ="onFileSelected" >
                   <!-- <button @click="$refs.selectImage.click()"> change Image </button> -->
                   <div class="profile_photo">
@@ -32,34 +34,33 @@
                  
                 <h3>Personal info</h3>
                 
-                <form class="form-horizontal" @submit.prevent="updateProfile" role="form">
-                  <div class="form-group">
-                    <label class="col-md-3 control-label">First name:</label>
-                    <div class="col-md-6">
-                      <input class="form-control" v-model="user.firstName" type="text" >
+
+                  <form class="form-horizontal" @submit.prevent="updateProfile" role="form">
+                   
+                    <div class="row">
+                      <div class="form-group">
+                          <label class="">First name:</label>
+
+                            <input class="form-control" v-model="user.firstName" type="text" >
+                        </div>
+                      </div>
+                    <div class="row">
+                        <div class="form-group">
+                          <label>Last name:</label>
+                            <input class="form-control" v-model="user.lastName"  type="text" >
+                        </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-3 control-label">Last name:</label>
-                    <div class="col-lg-6">
-                      <input class="form-control" v-model="user.lastName"  type="text" >
+                    <div class="row">
+                      <div class="form-group">
+                        <label class="control-label"></label>
+                          <input type="submit" class="btn btn-primary" value="Save Changes">
+                          <span></span>
+                          <input type="reset" class="btn btn-default" value="Cancel">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-md-3 control-label">Mobile No:</label>
-                    <div class="col-md-6">
-                      <input class="form-control" v-model="user.mobile" type="number">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-md-3 control-label"></label>
-                    <div class="col-md-6">
-                      <input type="submit" class="btn btn-primary" value="Save Changes">
-                      <span></span>
-                      <input type="reset" class="btn btn-default" value="Cancel">
-                    </div>
-                  </div>
-                </form>
+                 
+                  </form>
+               
               </div>
             </div>
             <!-- <div class="row">
@@ -237,5 +238,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.profile_photo_con h6{
+      float: left;
+    color: #fff;
+    margin-top: -40px;
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-size: 13px;
 
+}
+.editProfile h2{
+  font-size: 30px;
+  padding: 20px;
+  color: #fff;
+  text-transform: capitalize;
+}
 </style>

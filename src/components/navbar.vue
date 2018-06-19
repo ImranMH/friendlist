@@ -157,7 +157,9 @@ export default {
   overflow: hidden;
   border-bottom: 1px solid #ccc;
 }
-
+.navbar-brand a{
+    letter-spacing: 2px
+}
 .profile_item_title{
   font-size: 18px;
   text-align: center;
@@ -208,9 +210,7 @@ button{
 
 }
 @media (max-width : 835px) {
-     .navbar-brand{
-        background: blue;
-    }
+
     .show-tablet{
         display: block;
         border: 1px solid #ccc;
@@ -249,9 +249,7 @@ button{
     }
 }
 @media (max-width : 575px) {
-     .navbar-brand{
-        background: green;
-    }
+
     .mobile_off{
         display: block;
     }

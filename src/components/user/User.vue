@@ -13,12 +13,13 @@
                   <th scope="col">image</th>
                   <th scope="col">Name</th>
                   <th scope="col">Type</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">City</th>
-                  <th scope="col">Country</th>
-                  <th scope="col">Contact</th>
+                  <th class="small_hide" scope="col">Age</th>
+                  <th class="small_hide" scope="col">City</th>
+                  <th class="country_hide" scope="col">Country</th>
+                  <th class="comunicationhide" scope="col">Contact</th>
                   <th scope="col">Mobile</th>
-                  <th class="" scope="col">Know For</th>
+                  <th scope="col">Email</th>
+                  <th class="knowhide" scope="col">Know For</th>
                 </tr>
             </thead>
               <!-- <Todalist msg="hellow" v-bind:name="user.name" v-bind:country="user.country" v-bind:age="user.age" v-bind:city="user.city" v-bind:status="user.type" v-bind:no="user.title" /> -->
@@ -27,12 +28,13 @@
                 <td><router-link :to="'user/'+user.id" > <img class="list_image" :src="user.avatar" alt=""></router-link></td>
                 <td><router-link :to="'user/'+user.id" > {{user.name}}</router-link></td>
                 <td><router-link :to="'/users/'+user.type" > {{user.type}}</router-link></td>
-                <td>{{user.dob | moment("from","now", true)||user.age}}</td>
-                <td>{{user.city}}</td>
-                <td>{{user.country}}</td>
-                <td>{{user.communicationWay}}</td>
-                <td>{{user.mobile}}</td>
-                <td v-if="user.knowFrom">{{user.knowFrom | moment("from","now", true)}}</td>
+                <td  class="small_hide">{{user.dob | moment("from","now", true)||user.age}}</td>
+                <td class="small_hide">{{user.city}}</td>
+                <td class="country_hide">{{user.country}}</td>
+                <td class="comunicationhide">{{user.communicationWay}}</td>
+                <td ><a :href=" `tel:${user.mobile}`">{{user.mobile}}</a></td>
+                <td class="email"> <a :href=" `mailto:${user.email}`">{{user.email}}</a></td>
+                <td class="knowhide" v-if="user.knowFrom">{{user.knowFrom | moment("from","now", true)}}</td>
               </tr>
               </tbody>
             </table>
@@ -78,6 +80,7 @@ export default {
           mobile:u.val().mobile,
           knowFrom:u.val().knowFrom,
           dob:u.val().dob,
+          email:u.val().email,
           communicationWay:u.val().communicationWay,
         }
         this.userdata.push(data)
@@ -146,5 +149,35 @@ tr{
 td,th{
   padding-right: 4px;
 }
+.email{
+  font-size: 12px;
+  text-transform: lowercase;
+}
+@media(max-width:900px){
+  .comunicationhide{
+    display: none;
+  }
+  .knowhide{
+    display: none;
+  }
+}
+@media(max-width:730px){
+  .country_hide{
+    display: none;
+  }
+  tr td, tr a{
+    font-size: 12px;
+    line-height: 18px;
+  }
+  tr td {
+    padding: 2px;
+  }
 
+}
+@media(max-width:580px){
+  .small_hide{
+    display: none;
+  }
+
+}
 </style>

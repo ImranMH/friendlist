@@ -34,10 +34,10 @@
                  <td class="known">
                    {{user.knowFrom | moment("MMMM YYYY")}}
                  </td>
-                 <td>{{user.email}}</td>
-                 <td>{{user.mobile}}</td>
+                 <td><a :href=" `mailto:${user.email}`">{{user.email}}</a></td>
+                 <td><a :href=" `tel:${user.mobile}`">{{user.mobile}}</a></td>
                  <td>{{user.communicationWay}}</td>
-                 <td>{{user.status}}</td>
+                 <td>{{user.talk}}</td>
                </tr>
              </tbody>
            </table>
