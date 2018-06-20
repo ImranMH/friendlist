@@ -301,6 +301,20 @@ a:hover{
   text-decoration: none;
   color: #5d8bbd;;
 }
+.no_user{
+  color: #fff;
+  padding: 50px;
+}
+.no_user small{
+display: block;
+bottom: 40px;
+}
+.no_user p{
+  font-size: 25px;
+  text-transform: capitalize;
+  padding: 20px 0;
+  line-height: 35px;
+}
 /* input from css */
 /* @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
 * {

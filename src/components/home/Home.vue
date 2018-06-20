@@ -1,16 +1,54 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-sm-12">
+        <div class="user">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th class="small_hide" scope="col">Age</th>
+                <th class="small_hide" scope="col">City</th>
+                <th class="country_hide" scope="col">Country</th>
+                <th class="comunicationhide" scope="col">Contact</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Email</th>
+                <th class="knowhide" scope="col">Know For</th>
+              </tr>
+            </thead>
+              <!-- <Todalist msg="hellow" v-bind:name="user.name" v-bind:country="user.country" v-bind:age="user.age" v-bind:city="user.city" v-bind:status="user.type" v-bind:no="user.title" /> -->
+            <tbody>
+              <tr  v-for = "user of orderByType " v-bind:key ="user.id">
+                <td><router-link :to="'user/'+user.id" > <img class="list_image" :src="user.avatar" alt=""></router-link></td>
+                <td><router-link :to="'user/'+user.id" > {{user.name}}</router-link></td>
+                <td><router-link :to="'/users/'+user.type" > {{user.type}}</router-link></td>
+                <td  class="small_hide">{{user.dob | moment("from","now", true)||user.age || '---'}}</td>
+                <td class="small_hide">{{user.city|| "---"}}</td>
+                <td class="country_hide">{{user.country || "---"}}</td>
+                <td class="comunicationhide">{{user.communicationWay || "---"}}</td>
+                <td ><a v-if="user.mobile" :href=" `tel:${user.mobile}`">{{user.mobile}}</a><span v-else>{{'---'}}</span></td>
+                <td class="email"> <a v-if="user.mobile" :href=" `mailto:${user.email}`">{{user.email }}</a><span v-else>{{"---"}}</span></td>
+                <td class="knowhide"><span  v-if="user.knowFrom"> {{user.knowFrom | moment("from","now", true)}}</span><span v-else>{{'---'}}</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+    </div>
+    <div v-if="inputdata" class="row">
+      <div v-if="orderFriendsByKnownFrom.length> 0" class="col-md-6">
          <div class="friend_filter_list">
-           <h2 class="home_title">friends with me</h2>
+           <h2 class="home_title">friends still with me</h2>
            <table class="info_table table">
              <thead>
                <tr class="table_item">
                  <th>img</th>
                  <th>Friends</th>
                  <th>know for</th>
-                 <th>meet</th>
+                 <th>First meet</th>
                </tr>
              </thead>
              <tbody>
@@ -55,7 +93,7 @@
   
         </div>
       </div>
-      <div class="col-md-6">
+      <div v-if="friendshipBreak.length> 0" class="col-md-6">
          <div class="friend_filter_list">
            <h2 class="home_title">Lost Friend</h2>
           <ul class="list-group">
@@ -76,6 +114,18 @@
         </div>
       </div>
     </div>
+    <div v-else class="row">
+      <div class="col-md-12">
+        <div class="text-center no_user">
+          <p>You Haven't add any friend yet</p>          
+          <router-link to="/user/new" class="nav_link custom_button"><i class="fas fa-plus"></i> addnew</router-link>
+           <small>
+            For Update friend go to friend home page and then use Update profile 
+          </small>
+        </div>
+      </div>
+      
+    </div>
   </div>
  
 </template>
@@ -92,11 +142,6 @@ export default {
     return {
       currentUser : auth.currentUser,
       inputdata: [],
-      users:[
-        'Cras justo odio',
-        'Dapibus ac facilisis in',
-        'Morbi leo risus'
-      ],
       userdata: [],
       newFriend: [],
       oldFriend: [],
@@ -152,6 +197,9 @@ export default {
   computed:{
     orderFriendsByKnownFrom:function () {
       return _.orderBy(this.oldFriend,'knowFrom','desc')
+    },
+    orderByType:function () {
+      return _.orderBy(this.userdata,'type')
     }
   },
   methods:{
@@ -191,6 +239,9 @@ li {
   margin-top: 50px;
   border-bottom: none;
 
+}
+.user{
+  margin-top: 30px;
 }
 .list-group{
   padding: 3px 0px 0px 3px;
@@ -274,5 +325,64 @@ p.know_from_2{
 .info_table td {
   padding: 5px;
   border:1px solid #ccc;
+}
+
+
+.user{
+  margin-top: 108px;
+}
+/* from user */
+.list_image{
+  width: 40px;
+  height: 29px;
+  margin-top: -0.50rem;
+  margin-bottom: -0.50rem;
+  max-width: 100%;
+
+}
+.user table{
+  text-align: left;
+  text-transform: capitalize;
+  margin: 0 auto;
+}
+tbody,thead{
+  color: #fff;
+}
+tr{
+  border: 1px solid #555;
+}
+td,th{
+  padding-right: 4px;
+}
+.email{
+  font-size: 12px;
+  text-transform: lowercase;
+}
+@media(max-width:900px){
+  .comunicationhide{
+    display: none;
+  }
+  .knowhide{
+    display: none;
+  }
+}
+@media(max-width:730px){
+  .country_hide{
+    display: none;
+  }
+  tr td, tr a{
+    font-size: 12px;
+    line-height: 18px;
+  }
+  tr td {
+    padding: 2px;
+  }
+
+}
+@media(max-width:580px){
+  .small_hide{
+    display: none;
+  }
+
 }
 </style>

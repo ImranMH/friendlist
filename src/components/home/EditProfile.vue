@@ -8,7 +8,7 @@
                 <div class="alert alert-info alert-dismissable">
                   <a class="panel-close close" data-dismiss="alert">×</a> 
                   <i class="fa fa-coffee"></i>
-                  This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                   <strong>{{response.msg}}</strong>
                 </div>
               </div>
               
@@ -34,57 +34,36 @@
                  
                 <h3>Personal info</h3>
                 
-
-                  <form class="form-horizontal" @submit.prevent="updateProfile" role="form">
-                   
-                    <div class="row">
-                      <div class="form-group">
-                          <label class="">First name:</label>
-
-                            <input class="form-control" v-model="user.firstName" type="text" >
-                        </div>
-                      </div>
-                    <div class="row">
-                        <div class="form-group">
-                          <label>Last name:</label>
-                            <input class="form-control" v-model="user.lastName"  type="text" >
-                        </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group">
-                        <label class="control-label"></label>
-                          <input type="submit" class="btn btn-primary" value="Save Changes">
-                          <span></span>
-                          <input type="reset" class="btn btn-default" value="Cancel">
+                  <form @submit.prevent="updateProfile" role="form">
+                    <div class="form-group row">
+                      <label for="fname" class="col-sm-2 col-form-label">First Name</label>
+                      <div class="col-sm-10">
+                        <input type="text" v-model="user.firstName"  class="form-control" id="fname" value="email@example.com">
                       </div>
                     </div>
-                 
+                    <div class="form-group row">
+                      <label for="lname" class="col-sm-2 col-form-label">Lasst Name</label>
+                      <div class="col-sm-10">
+                        <input type="text" v-model="user.lastName"  class="form-control" id="lname" value="email@example.com">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="email" class="col-sm-2 col-form-label">Email</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" readonly  id="email" :value="currentUser.email">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary" value="Save Changes">Save Changes</button>
+                        <button type="reset" class="btn btn-default" value="Cancel">Cancel</button>
+                      </div>
+                        
+                    </div>
                   </form>
-               
+              
               </div>
             </div>
-            <!-- <div class="row">
-              <div class="col-md-12">
-                <ul class="edit">
-                  <li class="edit_item">
-                    <div class="name">
-                      Name <input v-model="userEdit.displayName" value="currentUser.displayName" type="text">
-                    </div>
-                  </li>
-                  <li class="edit_item">
-                  <div class="mobile">
-                        mobile:<input v-model="userEdit.phoneNumber" value="currentUser.phoneNumber" type="text" >
-                    </div>
-                  </li>
-                  <li class="edit_item">
-                    <div class="currently_live">
-                      profile Url: <input  v-model="userEdit.photoURL" type="text">                    
-                    </div>
-                  </li>
-                  <button @click="updateProfile" class="btn btn-primary">update Profile</button>
-                </ul>
-              </div>
-            </div> -->
         </div>
       </div>
 
@@ -103,6 +82,7 @@ export default {
       currentUser : auth.currentUser,
       userEdit: {},
       user:{},
+      response: {},
       selectedFile : null,
       editMood: false,
       displayMood:true,
@@ -165,10 +145,11 @@ export default {
             photoURL: downloadURL
           }).then(function() {
             // Update successful.
-            console.log('Update successful.')
+            console.log('Update successful profile name.')
+            this.response.meg = 'Update successful profile name.'
           }).catch(function(error) {
             // An error happened.
-            console.log('An error happened')
+            this.response.meg ='An error happened'
           }); 
         });
       });
@@ -252,5 +233,18 @@ export default {
   padding: 20px;
   color: #fff;
   text-transform: capitalize;
+}
+.personal-info{
+  background: #ccc;
+    padding: 30px;
+}
+.personal-info h3{
+  color: #fff;
+  text-align: left;
+  text-transform: capitalize;
+  margin-bottom: 20px;
+}
+.from-group button{
+  margin-right: 20px;
 }
 </style>

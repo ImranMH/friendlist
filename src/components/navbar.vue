@@ -13,7 +13,7 @@
                           <router-link to="/" class="nav-link"><i class="fa fa-home"></i> Home</router-link>
                       </li>
                       <li class="nav-item " v-if="isLoggedIn">
-                          <router-link to="/user" class="nav-link"><i class="fas fa-user"></i> User</router-link>
+                          <router-link to="/user" class="nav-link"><i class="fas fa-user"></i> Friends</router-link>
                       </li>
                      
                   </ul>

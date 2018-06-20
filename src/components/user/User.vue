@@ -1,13 +1,12 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      {{cu}}
       <div class="col-md-12">
          <div class="user">
            
-          <div >
+          <div v-if="userdata.length> 0">
             <router-link to="/user/new" class="nav_link custom_button"><i class="fas fa-plus"></i> addnew</router-link>
-            <table >
+            <table>
               <thead>
                 <tr>
                   <th scope="col">image</th>
@@ -21,24 +20,27 @@
                   <th scope="col">Email</th>
                   <th class="knowhide" scope="col">Know For</th>
                 </tr>
-            </thead>
-              <!-- <Todalist msg="hellow" v-bind:name="user.name" v-bind:country="user.country" v-bind:age="user.age" v-bind:city="user.city" v-bind:status="user.type" v-bind:no="user.title" /> -->
-            <tbody>
-              <tr  v-for = "user of orderFriends " v-bind:key ="user.id">
-                <td><router-link :to="'user/'+user.id" > <img class="list_image" :src="user.avatar" alt=""></router-link></td>
-                <td><router-link :to="'user/'+user.id" > {{user.name}}</router-link></td>
-                <td><router-link :to="'/users/'+user.type" > {{user.type}}</router-link></td>
-                <td  class="small_hide">{{user.dob | moment("from","now", true)||user.age}}</td>
-                <td class="small_hide">{{user.city}}</td>
-                <td class="country_hide">{{user.country}}</td>
-                <td class="comunicationhide">{{user.communicationWay}}</td>
-                <td ><a :href=" `tel:${user.mobile}`">{{user.mobile}}</a></td>
-                <td class="email"> <a :href=" `mailto:${user.email}`">{{user.email}}</a></td>
-                <td class="knowhide" v-if="user.knowFrom">{{user.knowFrom | moment("from","now", true)}}</td>
-              </tr>
+              </thead>
+                <!-- <Todalist msg="hellow" v-bind:name="user.name" v-bind:country="user.country" v-bind:age="user.age" v-bind:city="user.city" v-bind:status="user.type" v-bind:no="user.title" /> -->
+              <tbody>
+                <tr  v-for = "user of orderFriends " v-bind:key ="user.id">
+                  <td><router-link :to="'user/'+user.id" > <img class="list_image" :src="user.avatar" alt=""></router-link></td>
+                  <td><router-link :to="'user/'+user.id" > {{user.name}}</router-link></td>
+                  <td><router-link :to="'/users/'+user.type" > {{user.type}}</router-link></td>
+                  <td  class="small_hide">{{user.dob | moment("from","now", true)||user.age || '---'}}</td>
+                  <td class="small_hide">{{user.city|| "---"}}</td>
+                  <td class="country_hide">{{user.country || "---"}}</td>
+                  <td class="comunicationhide">{{user.communicationWay || "---"}}</td>
+                  <td ><a v-if="user.mobile" :href=" `tel:${user.mobile}`">{{user.mobile}}</a><span v-else>{{'---'}}</span></td>
+                  <td class="email"> <a v-if="user.mobile" :href=" `mailto:${user.email}`">{{user.email }}</a><span v-else>{{"---"}}</span></td>
+                  <td class="knowhide"><span  v-if="user.knowFrom"> {{user.knowFrom | moment("from","now", true)}}</span><span v-else>{{'---'}}</span></td>
+                </tr>
               </tbody>
             </table>
-          
+          </div>
+          <div v-else class="text-center no_user">
+            <p>You Haven't add any friend yet</p>
+            <router-link to="/user/new" class="nav_link custom_button"><i class="fas fa-plus"></i> addnew</router-link>
           </div>
             
 

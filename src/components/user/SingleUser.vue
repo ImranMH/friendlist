@@ -16,7 +16,7 @@
               <small><router-link :to="'/users/'+singleFriend.type" > {{singleFriend.type}}</router-link> </small> 
             </div>           
             <div class="edit_profile_link">
-              <router-link :to="'/user/'+$route.params.id+'/edit'" class="nav_link custom_button"><i class="fa fa-cog"></i> Profile setting</router-link>
+              <router-link :to="'/user/'+$route.params.id+'/edit'" class="nav_link custom_button"><i class="fa fa-cog"></i> Update User Info</router-link>
             </div>
         </div> 
         <div class="row" >

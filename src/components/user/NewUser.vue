@@ -1,6 +1,6 @@
 <template>
-
-        <div class="form_container">  
+      <div class="background_area">
+         <div class="form_container">  
           <form @submit.prevent="addUser" id="contact">
             <h3>Add Friend to your friendlist</h3>
             <h4>You can Edit those field later from edit friend option</h4>
@@ -18,7 +18,7 @@
             </fieldset>
             <fieldset>
               <label >Type of Friend</label>
-              <select placeholder="Type of Friend" v-model="inputdata.type"> 
+              <select placeholder="Type of Friend" v-model="inputdata.type" required > 
                 
                 <option v-for = "(type, index) of friendType" :value="type" v-bind:key ="index" >{{type}}</option>               
               </select>
@@ -29,7 +29,9 @@
           </form>
 
 
-        </div>       
+        </div> 
+      </div>
+             
 
  
 </template>
@@ -70,7 +72,7 @@ export default {
     
       let users = rtdb.ref('users').child(currentUserId)
       users.push(user, function () {
-        console.log('successfull')
+        this.$router.push('/')
       })
       this.inputdata = {} 
 
@@ -112,12 +114,15 @@ body {
   color: #777;
   background: #4CAF50;
 }
-
+.background_area{
+   background: #212529;
+}
 .form_container {
   max-width: 500px;
   width: 100%;
-  margin: 40px auto;
+  margin: 0px auto;
   position: relative;
+  padding: 40px 0;
 }
 
 #contact input[type="text"],
@@ -150,7 +155,9 @@ body {
   font-size: 13px;
   font-weight: 400;
 }
-
+.app{
+  background: #212529;
+}
 fieldset {
   border: medium none !important;
   margin: 0 0 10px;
