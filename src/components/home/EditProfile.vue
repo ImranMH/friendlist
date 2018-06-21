@@ -42,7 +42,7 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label for="lname" class="col-sm-2 col-form-label">Lasst Name</label>
+                      <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
                       <div class="col-sm-10">
                         <input type="text" v-model="user.lastName"  class="form-control" id="lname" value="email@example.com">
                       </div>
@@ -233,15 +233,16 @@ export default {
 }
 .personal-info{
   background: #ccc;
-    padding: 30px;
+  padding: 30px;
+  color:#777
 }
 .personal-info h3{
-  color: #fff;
+  color: #777;
   text-align: left;
   text-transform: capitalize;
   margin-bottom: 20px;
 }
-.from-group button{
+ button{
   margin-right: 20px;
 }
 </style>

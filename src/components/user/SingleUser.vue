@@ -5,7 +5,7 @@
     <div class="row ">
       <div class="col-md-3">       
         <div class="avatar">
-          <img :src="singleFriend.avatar" :alt="singleFriend.avatar">
+          <img :src="singleFriend.avatar" :alt="singleFriend.name">
         </div>       
       </div>
       <div class="col-md-9">

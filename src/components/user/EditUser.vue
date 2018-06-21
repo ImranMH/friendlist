@@ -24,6 +24,13 @@
           
           <!-- <input type="file" class="form-control"> -->
         </div>
+           <div class="btn_list show_770">
+              <span class="btn btn-primary" v-show="displayMood" @click="showEdit"> <i class="fa fa-edit"></i> Edit </span>
+              <span class="btn btn-warning" v-show="editMood" @click="updateOption"> Update </span>
+              <span  class="btn btn-info" v-show="displayMood" @click="hideEdit"> <router-link :to="'/user/'+$route.params.id" >back</router-link></span>
+              <span class="btn btn-info" v-show="editMood" @click="hideEdit" > Cancel</span>
+              <span class="btn btn-danger"  @click="deleteFriend(singleFriend.id)" > Delete</span>
+          </div>
           <div class="edit social_edit">
             <h2 class="friend_edit_title" v-show="displayMood">social Account List</h2>
             <h2 class="friend_edit_title" v-show="editMood">Add social Account </h2>
@@ -37,13 +44,13 @@
             </ul>
           </div>
       </div>
-      <div class="col-md-7">
-          <div class="btn_list">
-          <span class="btn btn-primary" v-show="displayMood" @click="showEdit"> <i class="fa fa-edit"></i> Edit </span>
-          <span class="btn btn-warning" v-show="editMood" @click="updateOption"> Update </span>
-          <span  class="btn btn-info" v-show="displayMood" @click="hideEdit"> <router-link :to="'/user/'+$route.params.id" >back</router-link></span>
-          <span class="btn btn-info" v-show="editMood" @click="hideEdit" > Cancel</span>
-          <span class="btn btn-danger"  @click="deleteFriend(singleFriend.id)" > Delete</span>
+      <div class="col-md-7 ">
+          <div class="btn_list hide_770">
+            <span class="btn btn-primary" v-show="displayMood" @click="showEdit"> <i class="fa fa-edit"></i> Edit </span>
+            <span class="btn btn-warning" v-show="editMood" @click="updateOption"> Update </span>
+            <span  class="btn btn-info" v-show="displayMood" @click="hideEdit"> <router-link :to="'/user/'+$route.params.id" >back</router-link></span>
+            <span class="btn btn-info" v-show="editMood" @click="hideEdit" > Cancel</span>
+            <span class="btn btn-danger"  @click="deleteFriend(singleFriend.id)" > Delete</span>
         </div>
         
           <div class="edit">
@@ -413,4 +420,5 @@ export default {
   .friend_avater_change input{
     margin-bottom: 20px;
   }
+  
 </style>

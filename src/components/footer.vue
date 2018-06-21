@@ -15,7 +15,7 @@
 						<router-link to="/contact" class="nav-link"> contact</router-link>
 					</p>
 
-					<p class="footer-company-name">Friendlist &copy; 2015</p>
+					<p class="footer-company-name">Friendlist &copy; {{Date.now() | moment('YYYY')}} </p>
 
 				</footer>
 			</div>
@@ -62,8 +62,8 @@ export default {
 	text-align: center;
 	font: normal 18px sans-serif;
 
-	padding: 45px;
-	margin-top: 80px;
+	padding: 25px;
+	margin-top: 25px;
 }
 
 .footer-basic-centered .footer-company-motto{
@@ -82,7 +82,7 @@ export default {
 	list-style: none;
 	font-weight: bold;
 	color:  #ffffff;
-	padding: 35px 0 23px;
+	padding: 20px 0 20px;
 	margin: 0;
 }
 
@@ -90,6 +90,7 @@ export default {
 	display:inline-block;
 	text-decoration: none;
 	color: inherit;
+	size: 15px
 }
 
 /* If you don't want the footer to be responsive, remove these media queries */
@@ -106,7 +107,7 @@ export default {
 @media (max-width: 600px) {
 
 	.footer-basic-centered{
-		padding: 35px;
+		padding: 15px;
 	}
 
 	.footer-basic-centered .footer-company-motto{
@@ -124,6 +125,7 @@ export default {
 
 	.footer-basic-centered .footer-links a{
 		line-height: 1.8;
+		padding: 0px 5px;
 	}
 }
 </style>

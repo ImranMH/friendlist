@@ -377,6 +377,11 @@ td,th{
   .small_hide{
     display: none;
   }
+  .edit_item input, select, .edit_item span{
+    margin-left: 10px;
+    padding: 2px 5px;
+    width: 250px;
+  }
 
 }
 @media(min-width:1100px){

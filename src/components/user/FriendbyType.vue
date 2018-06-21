@@ -8,14 +8,14 @@
             <table class="info_table table">
              <thead>
                <tr class="table_item">
-                 <th>img</th>
+                 <th>photo</th>
                  <th>Friends</th>
-                 <th>know for</th>
-                 <th>meet</th>
-                 <th>email</th>
-                 <th>mobile</th>
+                 <th class="hide_900">know for</th>
+                 <th class="hide_580">meet</th>
+                 <th class="hide_770">email</th>
+                 <th>city</th>
                  <th>talk In</th>
-                 <th>status</th>
+                 <th>mobile</th>
                  
                </tr>
              </thead>
@@ -26,18 +26,18 @@
                  </td>
                  <td class="name">
                    <h3><router-link :to="'/user/'+user.id" > {{user.name}}</router-link></h3>
-                  <small><router-link :to="'/users/'+user.type" > {{user.city}}</router-link></small>
+                 
                  </td>
-                 <td class="duration">
+                 <td class="duration hide_900">
                    {{user.knowFrom | moment('from',"now",true)}}
                  </td>
-                 <td class="known">
+                 <td class="known hide_580">
                    {{user.knowFrom | moment("MMMM YYYY")}}
                  </td>
-                 <td><a :href=" `mailto:${user.email}`">{{user.email}}</a></td>
-                 <td><a :href=" `tel:${user.mobile}`">{{user.mobile}}</a></td>
+                 <td class="hide_770"><a :href=" `mailto:${user.email}`">{{user.email}}</a></td>
+                 <td>{{user.city}}</td>
                  <td>{{user.communicationWay}}</td>
-                 <td>{{user.talk}}</td>
+                 <td><a :href=" `tel:${user.mobile}`">{{user.mobile}}</a></td>
                </tr>
              </tbody>
            </table>
@@ -188,12 +188,15 @@ a {
 .table_item th{
    padding: 5px;
   border:1px solid #555;
+  text-align: center;
 }
 .table_avatar{
   max-width: 100%;
 }
 .info_table td {
-  padding: 5px;
+  padding: 2px;
   border:1px solid #555;
+  vertical-align: middle;
+  text-align: center;
 }
 </style>
