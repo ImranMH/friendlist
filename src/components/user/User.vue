@@ -12,13 +12,13 @@
                   <th scope="col">image</th>
                   <th scope="col">Name</th>
                   <th scope="col">Type</th>
-                  <th class="small_hide" scope="col">Age</th>
+                  <th class="hide_400" scope="col">Age</th>
                   <th class="small_hide" scope="col">City</th>
-                  <th class="country_hide" scope="col">Country</th>
-                  <th class="comunicationhide" scope="col">Contact</th>
+                  <th class="hide_580" scope="col">Country</th>
+                  <th class="hide_900" scope="col">Contact</th>
                   <th scope="col">Mobile</th>
-                  <th scope="col">Email</th>
-                  <th class="knowhide" scope="col">Know For</th>
+                  <th class="hide_770" scope="col">Email</th>
+                  <th class="hide_900" scope="col">Know For</th>
                 </tr>
               </thead>
                 <!-- <Todalist msg="hellow" v-bind:name="user.name" v-bind:country="user.country" v-bind:age="user.age" v-bind:city="user.city" v-bind:status="user.type" v-bind:no="user.title" /> -->
@@ -27,13 +27,13 @@
                   <td><router-link :to="'user/'+user.id" > <img class="list_image" :src="user.avatar" alt=""></router-link></td>
                   <td><router-link :to="'user/'+user.id" > {{user.name}}</router-link></td>
                   <td><router-link :to="'/users/'+user.type" > {{user.type}}</router-link></td>
-                  <td  class="small_hide"><span v-if="user.dob">{{user.dob | moment("from","now", true)}}</span><span v-else >{{user.age || '---'}}</span></td>
+                  <td  class="hide_400"><span v-if="user.dob">{{user.dob | moment("from","now", true)}}</span><span v-else >{{user.age || '---'}}</span></td>
                   <td class="small_hide">{{user.city|| "---"}}</td>
-                  <td class="country_hide">{{user.country || "---"}}</td>
-                  <td class="comunicationhide">{{user.communicationWay || "---"}}</td>
+                  <td class="hide_580">{{user.country || "---"}}</td>
+                  <td class="hide_900">{{user.communicationWay || "---"}}</td>
                   <td ><a v-if="user.mobile" :href=" `tel:${user.mobile}`">{{user.mobile}}</a><span v-else>{{'---'}}</span></td>
-                  <td class="email"> <a v-if="user.mobile" :href=" `mailto:${user.email}`">{{user.email }}</a><span v-else>{{"---"}}</span></td>
-                  <td class="knowhide"><span  v-if="user.knowFrom"> {{user.knowFrom | moment("from","now", true)}}</span><span v-else>{{'---'}}</span></td>
+                  <td class="email hide_770"> <a v-if="user.mobile" :href=" `mailto:${user.email}`">{{user.email }}</a><span v-else>{{"---"}}</span></td>
+                  <td class="hide_900"><span  v-if="user.knowFrom"> {{user.knowFrom | moment("from","now", true)}}</span><span v-else>{{'---'}}</span></td>
                 </tr>
               </tbody>
             </table>
@@ -154,32 +154,5 @@ td,th{
 .email{
   font-size: 12px;
   text-transform: lowercase;
-}
-@media(max-width:900px){
-  .comunicationhide{
-    display: none;
-  }
-  .knowhide{
-    display: none;
-  }
-}
-@media(max-width:730px){
-  .country_hide{
-    display: none;
-  }
-  tr td, tr a{
-    font-size: 12px;
-    line-height: 18px;
-  }
-  tr td {
-    padding: 2px;
-  }
-
-}
-@media(max-width:580px){
-  .small_hide{
-    display: none;
-  }
-
 }
 </style>

@@ -119,7 +119,7 @@ export default {
 
 	.footer-basic-centered .footer-links{
 		font-size: 14px;
-		padding: 25px 0 20px;
+		padding: 20px 0 15px;
 	}
 
 	.footer-basic-centered .footer-links a{

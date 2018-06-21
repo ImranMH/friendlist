@@ -1,9 +1,10 @@
 import Vue from 'vue'
 //import VueRouter from 'vue-router'
+import VueMoment from 'vue-moment'
 import App from './App.vue'
 import router from './route'
 import firebase from 'firebase'
-Vue.use(require('vue-moment'));
+Vue.use(VueMoment);
 let app ;
 
 Vue.config.productionTip = false

@@ -358,4 +358,47 @@ body {
 :-ms-input-placeholder {
   color: #888;
 } */
+
+
+
+/*  responsive css */
+
+@media(max-width:900px){
+  .hide_900{
+    display: none;
+  }
+}
+@media(max-width:770px){
+  .hide_770{
+    display: none;
+  }
+  tr td, tr a{
+    font-size: 12px;
+    line-height: 18px;
+  }
+  tr td {
+    padding: 2px;
+  }
+
+}
+@media(max-width:580px){
+  .hide_580{
+    display: none;
+  }
+  .footer-basic-centered{
+	padding: 25px;
+	margin-top: 40px;
+}
+  .footer-links a{
+	padding: 0px 5px;
+
+}
+
+}
+@media(max-width:400px){
+  .hide_400{
+    display: none;
+  }
+
+}
 </style>

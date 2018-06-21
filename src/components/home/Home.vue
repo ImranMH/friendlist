@@ -15,7 +15,7 @@
                 <th class="country_hide" scope="col">Country</th>
                 <th class="comunicationhide" scope="col">Contact</th>
                 <th scope="col">Mobile</th>
-                <th scope="col">Email</th>
+                <th class="hide_580" scope="col">Email</th>
                 <th class="knowhide" scope="col">Know For</th>
               </tr>
             </thead>
@@ -30,7 +30,7 @@
                 <td class="country_hide">{{user.country || "---"}}</td>
                 <td class="comunicationhide">{{user.communicationWay || "---"}}</td>
                 <td ><a v-if="user.mobile" :href=" `tel:${user.mobile}`">{{user.mobile}}</a><span v-else>{{'---'}}</span></td>
-                <td class="email"> <a v-if="user.mobile" :href=" `mailto:${user.email}`">{{user.email }}</a><span v-else>{{"---"}}</span></td>
+                <td class="email hide_580"> <a v-if="user.mobile" :href=" `mailto:${user.email}`">{{user.email }}</a><span v-else>{{"---"}}</span></td>
                 <td class="knowhide"><span  v-if="user.knowFrom"> {{user.knowFrom | moment("from","now", true)}}</span><span v-else>{{'---'}}</span></td>
               </tr>
             </tbody>
