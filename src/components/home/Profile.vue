@@ -4,7 +4,7 @@
       
       <div class="row ">
             <div class="col-sm-8">
-              <div class="">
+              <div class="pro_top">
                 <div class="profile_photo">
                   <img :src="currentUser.photoURL" alt="">
                 </div>
@@ -137,7 +137,6 @@ export default {
     }
   },
   created: function () {
-    console.log("created")
       let currentUserId= this.currentUser.uid
       const user = rtdb.ref().child('users').child(currentUserId)
       user.on('value',snap=>{
@@ -221,11 +220,13 @@ export default {
     color: #777;
 }
 .profile_item{
-  background: #555;
-  color:#fff;
-  text-align: left;
-  overflow: hidden;
-  margin-bottom: 25px;
+    background: #35393c;
+    color: #555;
+    text-align: left;
+    overflow: hidden;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    border: 1px solid #555;
 }
 .col-md-9.personal-info {
     background: #ccc;
@@ -233,16 +234,19 @@ export default {
     margin-right: 0px;
 
 }
+.pro_top{  
+    margin-top: 40px;
+}
 .profile_item li{
   overflow: hidden;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #555;
 }
 .profile_item_title{
   font-size: 16px;
   text-align: center;
   margin-top: 10px;
   text-transform: uppercase;
-  border-bottom: 3px solid #9a9a90;
+  border-bottom: 1px solid #555;
   padding-bottom: 5px;
 }
 .profile_item h4{

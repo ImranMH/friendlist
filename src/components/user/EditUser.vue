@@ -2,7 +2,7 @@
 <div class="singleFriend">
 
   <div class="container-fluid ">
-    <div class="row" v-if="message">
+    <!-- <div class="row" v-if="message">
       <div class="col-md-12">
         <div class="alert alert-info alert-dismissable">
           <a class="panel-close close" data-dismiss="alert">×</a> 
@@ -10,7 +10,7 @@
           This is an <strong>.alert</strong>. Use this to show important messages to the user.
         </div>
       </div>        
-    </div>
+    </div> -->
     <div class="row">
       <div class="col-md-5">
         <div class="text-center friend_avater_change">

@@ -7,12 +7,12 @@
 					<p class="footer-company-motto">keep Your friens activities alive</p>
 
 					<p class="footer-links">
-						<a href="#">Home</a>
-						<a href="#">Blog</a>
-						<a href="#">Pricing</a>
-						<a href="#">About</a>
+						<router-link to="/" class="nav-link"> home</router-link>
+						<router-link to="/user" class="nav-link"> firends</router-link>
+
+						<router-link to="/about" class="nav-link"> about</router-link>
 						<a href="#">Faq</a>
-						<a href="#">Contact</a>
+						<router-link to="/contact" class="nav-link"> contact</router-link>
 					</p>
 
 					<p class="footer-company-name">Friendlist &copy; 2015</p>
@@ -98,6 +98,7 @@ export default {
 }
 .footer-links a{
 	padding: 0px 10px;
+	text-transform: capitalize;
 }
 .footer-links a:hover{
 	color: #555;

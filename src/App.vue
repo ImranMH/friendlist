@@ -258,6 +258,7 @@ label,
 }
 .container-fluid{
   background: #212529;
+  color: #fff;
 }
 .profile_item h4{
   font-size: 14px;
@@ -287,8 +288,10 @@ label,
   text-transform: capitalize;
 }
 .user .site-heading{
-  color: #555;
-  padding: 0;
+   color: #e2d9d9;
+    padding: 0;
+    text-align: center;
+    font-size: 30px;
 
 }
 h3 a {

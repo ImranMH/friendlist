@@ -11,6 +11,9 @@ import SingleUser from './components/user/SingleUser.vue'
 import EditUser from './components/user/EditUser.vue'
 import Login from './components/login/index.vue'
 import Signup from './components/login/signup.vue'
+import About from './components/utilities/about.vue'
+import Contact from './components/utilities/contact.vue'
+
 import { auth } from './firebase'
 
 Vue.use(VueRouter)
@@ -84,6 +87,16 @@ const routes = [
     path: '/signup',
     name: 'signup',
     component: Signup
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: About
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: Contact
   }
 ]
 const router = new VueRouter({

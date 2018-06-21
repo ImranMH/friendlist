@@ -27,7 +27,7 @@
                   <td><router-link :to="'user/'+user.id" > <img class="list_image" :src="user.avatar" alt=""></router-link></td>
                   <td><router-link :to="'user/'+user.id" > {{user.name}}</router-link></td>
                   <td><router-link :to="'/users/'+user.type" > {{user.type}}</router-link></td>
-                  <td  class="small_hide">{{user.dob | moment("from","now", true)||user.age || '---'}}</td>
+                  <td  class="small_hide"><span v-if="user.dob">{{user.dob | moment("from","now", true)}}</span><span v-else >{{user.age || '---'}}</span></td>
                   <td class="small_hide">{{user.city|| "---"}}</td>
                   <td class="country_hide">{{user.country || "---"}}</td>
                   <td class="comunicationhide">{{user.communicationWay || "---"}}</td>

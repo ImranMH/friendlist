@@ -1,8 +1,9 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
+    <div class="row" v-if="orderByType.length> 0">
       <div class="col-sm-12">
         <div class="user">
+          <router-link to="/user/new" class="nav_link custom_button"><i class="fas fa-plus"></i> addnew</router-link>
           <table>
             <thead>
               <tr>
@@ -24,7 +25,7 @@
                 <td><router-link :to="'user/'+user.id" > <img class="list_image" :src="user.avatar" alt=""></router-link></td>
                 <td><router-link :to="'user/'+user.id" > {{user.name}}</router-link></td>
                 <td><router-link :to="'/users/'+user.type" > {{user.type}}</router-link></td>
-                <td  class="small_hide">{{user.dob | moment("from","now", true)||user.age || '---'}}</td>
+                <td  class="small_hide"><span v-if="user.dob">{{user.dob | moment("from","now", true)}}</span><span v-else >{{user.age || '---'}}</span></td>
                 <td class="small_hide">{{user.city|| "---"}}</td>
                 <td class="country_hide">{{user.country || "---"}}</td>
                 <td class="comunicationhide">{{user.communicationWay || "---"}}</td>
@@ -182,9 +183,7 @@ export default {
 
       }) 
   },
-  mounted:function () {
-    console.log('mounted')
-  },
+
 
  filters: {
   listFilter: function (value) {
@@ -220,9 +219,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  /* margin: 40px 0 0; */
-}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -233,7 +230,7 @@ li {
 }
 
 .friend_filter_list{
-  border: 1px solid #ccc;
+  border: 1px solid #555;
   background: #212529;
   color:#fff;
   margin-top: 50px;
@@ -241,7 +238,7 @@ li {
 
 }
 .user{
-  margin-top: 30px;
+  margin-top: 0px;
 }
 .list-group{
   padding: 3px 0px 0px 3px;
@@ -252,7 +249,7 @@ li {
   justify-content: flex-start;
   
   text-align: left;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #555;
   margin-top: 5px;
 }
 .friend_list img{
@@ -297,7 +294,7 @@ p.know_from_2{
   text-transform: capitalize;
 }
 .table_item{
-  border:1px solid #ccc;
+  border:1px solid #555;
   padding: 5px;
 }
 .table_item .avatar{
@@ -317,20 +314,17 @@ p.know_from_2{
 }
 .table_item th{
    padding: 5px;
-  border:1px solid #ccc;
+  border:1px solid #555;
 }
 .table_avatar{
   max-width: 100%;
 }
 .info_table td {
   padding: 5px;
-  border:1px solid #ccc;
+  border:1px solid #555;
 }
 
 
-.user{
-  margin-top: 108px;
-}
 /* from user */
 .list_image{
   width: 40px;
@@ -382,6 +376,12 @@ td,th{
 @media(max-width:580px){
   .small_hide{
     display: none;
+  }
+
+}
+@media(min-width:1100px){
+  .email{
+    font-size: 16px;
   }
 
 }

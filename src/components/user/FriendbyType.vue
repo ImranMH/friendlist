@@ -128,11 +128,6 @@ export default {
       }) 
       
   },
-  mounted:function () {
-
-    console.log(this.$route.params.type)
-  },
-
 
   methods:{
 
@@ -164,7 +159,7 @@ a {
   text-shadow: 1px 1px 2px #000;
 }
 .friend_filter_list{
-    background: #e9ecef;
+    background: #292c2f;
     margin-top: 30px;
 }
 .info_table{
@@ -192,13 +187,13 @@ a {
 }
 .table_item th{
    padding: 5px;
-  border:1px solid #ccc;
+  border:1px solid #555;
 }
 .table_avatar{
   max-width: 100%;
 }
 .info_table td {
   padding: 5px;
-  border:1px solid #ccc;
+  border:1px solid #555;
 }
 </style>

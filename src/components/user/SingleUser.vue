@@ -249,8 +249,10 @@ export default {
   li{
     list-style-type: none
   }
-  .singleFriend_container,.user{
-    background: #e9ecef;;
+  .singleFriend .user{
+    background: #292c2f;
+    color: #fff;
+    padding: 20px;
   }
   .user{
     text-align: left;
@@ -388,4 +390,17 @@ export default {
   .red{
     background: red;
   }
+  @media(max-width:580px){
+  .friend_upper_block{
+    display: block;
+    
+  }
+  .edit_profile_link{
+    float: none;
+    text-align: left
+  }
+  .singleFriend_title{
+  float: none;
+  }
+}
 </style>

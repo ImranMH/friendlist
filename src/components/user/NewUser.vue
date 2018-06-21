@@ -26,6 +26,9 @@
             <fieldset>
               <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Add to List</button>
             </fieldset>
+            <fieldset>
+              <router-link class="btn btn-default btn-block bor-btn" to="/" > Cancel </router-link>
+            </fieldset>
           </form>
 
 
@@ -71,7 +74,7 @@ export default {
       user.avatar = 'https://firebasestorage.googleapis.com/v0/b/testwithvue-24462.appspot.com/o/friends%2Fuo9QztLb2VeanoAr9w2WcoKxZcv2%2Favatar-default.png?alt=media&token=6d90b5cb-ed8f-465d-8da7-15d3edfe7528'
     
       let users = rtdb.ref('users').child(currentUserId)
-      users.push(user, function () {
+      users.push(user, ()=> {
         this.$router.push('/')
       })
       this.inputdata = {} 
@@ -228,7 +231,10 @@ label,
 #contact button[type="submit"]:active {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
 }
-
+.bor-btn{
+  border: 1px solid #ccc;
+  padding: 10px;
+}
 .copyright {
   text-align: center;
 }

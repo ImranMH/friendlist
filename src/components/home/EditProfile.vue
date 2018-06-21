@@ -91,7 +91,6 @@ export default {
   },
 
   mounted: function () {
-    console.log(this.currentUser)
     if (this.currentUser != null) {
         this.currentUser.providerData.forEach(function (profile) {
          
@@ -140,12 +139,10 @@ export default {
         console.log(error)
       }, () =>{
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL)=> {
-          console.log('File available at', downloadURL);
            this.currentUser.updateProfile({         
             photoURL: downloadURL
           }).then(function() {
             // Update successful.
-            console.log('Update successful profile name.')
             this.response.meg = 'Update successful profile name.'
           }).catch(function(error) {
             // An error happened.
@@ -158,7 +155,7 @@ export default {
     updateEmail: function () {
       this.currentUser.updateEmail(this.email).then(function() {
         // Update successful.
-        console.log('Update successful.')
+
       }).catch(function(error) {
         // An error happened.
         console.log('An error happened')
