@@ -297,7 +297,13 @@ label,
 h3 a {
   color: #0056b3;
 }
+a{
+  color: #00b38c;
+}
 strong a {
+  color: #28a745;
+}
+.type_heading a {
   color: #28a745;
 }
 a:hover{
