@@ -119,6 +119,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.container{
+  width: 90%;
+  margin: 0 auto;
+}
 .privacy{
   text-align: left;
   margin: 20px auto;
@@ -130,3 +134,5 @@ h4{
  
 
 </style>
+
+
