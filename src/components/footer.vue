@@ -8,7 +8,7 @@
 
 					<p class="footer-links">
 						<router-link to="/" class="nav-link"> home</router-link>
-						<router-link to="/user" class="nav-link"> firends</router-link>
+						<router-link v-if="currentUser" to="/user" class="nav-link"> firends</router-link>
 
 						<router-link to="/about" class="nav-link"> about</router-link>
 						<router-link to="/privacy" class="nav-link"> privacy policy</router-link>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-
+import {auth} from './../firebase'
 export default {
   name: 'Footer',
   props: {
@@ -39,7 +39,7 @@ export default {
   },
   data(){
     return{
-
+			currentUser : auth.currentUser
     }
   },
   methods:{

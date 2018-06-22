@@ -1,5 +1,14 @@
 <template>
   <div class="login_component">
+    <div class="row"  v-if="message">
+        <div class="col-md-12">
+            <div class="alert alert-info alert-dismissable">
+            <a class="panel-close close" data-dismiss="alert">×</a> 
+            <i class="fa fa-coffee"></i>
+            {{message}}
+            </div>
+        </div>        
+    </div>
       <div class="login-form">
           <form @submit.prevent="login">
               <h2 class="text-center">Sign in</h2>   
@@ -49,6 +58,7 @@ export default {
     return{
       username: null,
       password: null,
+      message: '',
       authenticate: false
     }
   },
@@ -64,36 +74,35 @@ export default {
   },
   methods:{
     login: function(){
-      console.log(this.username, this.password)
+        this.message = ""
       const sign = auth.signInWithEmailAndPassword(this.username, this.password)
       sign.then(user=>{
         
         if(user){
-            console.log('authenticated as ',user.uid)
+            this.message = "logged in successfull"
             this.authenticate = true
             this.$router.push('/')
             //this.$router.go({path:this.$router.path})
         }
+        
       })
       sign.catch(err=>{
-        console.log(err)
+          this.message = "unable to signin Email /password incorrect"
       })
     },
     loginWithFacebook(){
-        console.log('favebook')
-        auth.signInWithPopup(provider).then(function(result) {
+        auth.signInWithPopup(provider).then((result)=> {
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         
         if(result){
             var token = result.credential.accessToken;
             // The signed-in user info.
             var user = result.user;
-            console.log('authenticated as ',user.uid)
             this.authenticate = true
             this.$router.push('/')
             //this.$router.go({path:this.$router.path})
         }
-        }).catch(function(error) {
+        }).catch((error)=> {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -105,19 +114,18 @@ export default {
         });
     },
     loginWithGoogle(){
-        auth.signInWithPopup(googleProvider).then(function(result) {
+        auth.signInWithPopup(googleProvider).then((result)=> {
         // This gives you a Google Access Token. You can use it to access the Google API.
             if(result){
                 var token = result.credential.accessToken;
                 // The signed-in user info.
                 var user = result.user;
-                console.log('authenticated as ',user.uid)
                 this.authenticate = true
                 this.$router.push('/')
                 //this.$router.go({path:this.$router.path})
             }
         // ...
-        }).catch(function(error) {
+        }).catch((error)=> {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;

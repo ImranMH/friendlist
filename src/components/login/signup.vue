@@ -1,6 +1,6 @@
 <template>
   <div class="login_component">
-    <div class="row" v-if="message">
+    <div class="row" >
       <div class="col-md-12">
         <div class="alert alert-info alert-dismissable">
           <a class="panel-close close" data-dismiss="alert">×</a> 
@@ -53,19 +53,24 @@ export default {
   },
   methods:{
     signup: function(){
-      console.log(this.username, this.password)
+        this.message = " "
       const sign = auth.createUserWithEmailAndPassword(this.username, this.password)
       sign.then(user=>{
         if(user){
+            this.message = "successfully register "
             console.log('authenticated as ',user.uid)
             this.authenticate = true
             this.$router.push('/')
             //this.$router.go({path:this.$router.path})
         }
+        
+         
+      }, err=>{
+          this.message = "unable to register invalid Email /password "
       })
       sign.catch(err=>{
-          this.message = err.message
-        console.log(err)
+        //   this.message = "unable to signin Email /password incorrect"
+        //console.log(err.message)
       })
     }
 
