@@ -1,5 +1,14 @@
 <template>
   <div class="login_component">
+    <div class="row" v-if="message">
+      <div class="col-md-12">
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <i class="fa fa-coffee"></i>
+          This is an <strong>.alert</strong>. Use this to show important messages to the user.
+        </div>
+      </div>        
+    </div>
       <div class="login-form">
           <form @submit.prevent="signup">
               <h2 class="text-center">Sign Up</h2>   
@@ -38,6 +47,7 @@ export default {
     return{
       username: null,
       password: null,
+      message: "",
       authenticate: false
     }
   },
@@ -54,6 +64,7 @@ export default {
         }
       })
       sign.catch(err=>{
+          this.message = err.message
         console.log(err)
       })
     }

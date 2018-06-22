@@ -11,7 +11,7 @@
 						<router-link to="/user" class="nav-link"> firends</router-link>
 
 						<router-link to="/about" class="nav-link"> about</router-link>
-						<a href="#">Faq</a>
+						<router-link to="/privacy" class="nav-link"> privacy policy</router-link>
 						<router-link to="/contact" class="nav-link"> contact</router-link>
 					</p>
 

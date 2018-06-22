@@ -13,6 +13,7 @@ import Login from './components/login/index.vue'
 import Signup from './components/login/signup.vue'
 import About from './components/utilities/about.vue'
 import Contact from './components/utilities/contact.vue'
+import Privacy from './components/utilities/privacy.vue'
 
 import { auth } from './firebase'
 
@@ -97,7 +98,12 @@ const routes = [
     path: '/contact',
     name: 'contact',
     component: Contact
-  }
+  },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: Privacy
+    }
 ]
 const router = new VueRouter({
   routes,
