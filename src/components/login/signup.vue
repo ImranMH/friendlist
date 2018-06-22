@@ -25,7 +25,7 @@
                   </div>
               </div>        
               <div class="form-group">
-                  <button type="submit" class="btn btn-primary login-btn btn-block">Sign in</button>
+                  <button type="submit" class="btn btn-primary login-btn btn-block">Register</button>
               </div>
           </form>
           <p class="text-center text-muted small">Already Registered ?<router-link to="/login" class="nav-link">Login here!</router-link></p>

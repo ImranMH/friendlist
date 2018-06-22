@@ -40,7 +40,7 @@
       </div>
     </div>
     <div v-if="inputdata" class="row">
-      <div v-if="orderFriendsByKnownFrom.length> 0" class="col-md-6">
+      <div v-if="orderFriendsByKnownFrom.length> 5" class="col-md-6">
          <div class="friend_filter_list">
            <h2 class="home_title">friends still with me</h2>
            <table class="info_table table">
@@ -94,7 +94,7 @@
   
         </div>
       </div>
-      <div v-if="friendshipBreak.length> 0" class="col-md-6">
+      <div v-if="friendshipBreak.length> 5" class="col-md-6">
          <div class="friend_filter_list">
            <h2 class="home_title">Lost Friend</h2>
           <ul class="list-group">

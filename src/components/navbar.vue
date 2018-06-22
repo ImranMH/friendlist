@@ -28,7 +28,7 @@
                         <router-link :to="'/home/'+currentUser.uid" class="nav-link">{{currentUser.displayName ||currentUser.email }}</router-link>
                     </li>
                     <li class=" nav-item" v-show="!isLoggedIn" >
-                        <router-link to="/login" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</router-link>
+                        <router-link to="/signup" class="nav-link"><i class="fas fa-sign-in-alt"></i> Signup</router-link>
                     </li>
                     <li @click="logout"  v-show="isLoggedIn"   class=" nav-item">
                         <router-link  to="/login" class="nav-link"><i class="fa fa-edit"></i> Logout</router-link>

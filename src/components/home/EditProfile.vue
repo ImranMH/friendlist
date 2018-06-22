@@ -56,7 +56,8 @@
                     <div class="form-group row">
                       <div class="col-sm-10">
                         <button type="submit" class="btn btn-primary" value="Save Changes">Save Changes</button>
-                        <button type="reset" class="btn btn-default" value="Cancel">Cancel</button>
+                        <router-link :to="'/home/'+currentUser.uid" class="btn btn-secondary">Cancel</router-link>
+                        
                       </div>
                         
                     </div>
@@ -91,11 +92,12 @@ export default {
   },
 
   mounted: function () {
-    if (this.currentUser != null) {
-        this.currentUser.providerData.forEach(function (profile) {
+    // if (this.currentUser != null) {
+    //     this.currentUser.providerData.forEach(function (profile) {
          
-        });
-      }
+    //     });
+    //   }
+ 
   },
   methods:{
     /* update user profile */
