@@ -1,14 +1,5 @@
 <template>
   <div class="login_component">
-    <div class="row"  v-if="message">
-        <div class="col-md-12">
-            <div class="alert alert-info alert-dismissable">
-            <a class="panel-close close" data-dismiss="alert">×</a> 
-            <i class="fa fa-coffee"></i>
-            {{message}}
-            </div>
-        </div>        
-    </div>
       <div class="login-form">
           <form @submit.prevent="login">
               <h2 class="text-center">Sign in</h2>   
@@ -58,28 +49,16 @@ export default {
     return{
       username: null,
       password: null,
-      message: '',
       authenticate: false
     }
   },
-  mounted: function () {
-    //  auth.onAuthStateChanged((user)=>{
-    //   console.log('state chanhge')
-    //   if(!user){
-    //       console.log('logout')
-    //   }
-    //   console.log(user)
-    //   console.log(auth.currentUser)
-    // })
-  },
+
   methods:{
     login: function(){
-        this.message = ""
       const sign = auth.signInWithEmailAndPassword(this.username, this.password)
       sign.then(user=>{
         
         if(user){
-            this.message = "logged in successfull"
             this.authenticate = true
             this.$router.push('/')
             //this.$router.go({path:this.$router.path})
@@ -87,7 +66,7 @@ export default {
         
       })
       sign.catch(err=>{
-          this.message = "unable to signin Email /password incorrect"
+          console.log(err)
       })
     },
     loginWithFacebook(){

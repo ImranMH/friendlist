@@ -1,14 +1,5 @@
 <template>
   <div class="login_component">
-    <div class="row" >
-      <div class="col-md-12">
-        <div class="alert alert-info alert-dismissable">
-          <a class="panel-close close" data-dismiss="alert">×</a> 
-          <i class="fa fa-coffee"></i>
-          This is an <strong>.alert</strong>. Use this to show important messages to the user.
-        </div>
-      </div>        
-    </div>
       <div class="login-form">
           <form @submit.prevent="signup">
               <h2 class="text-center">Sign Up</h2>   
@@ -47,17 +38,14 @@ export default {
     return{
       username: null,
       password: null,
-      message: "",
       authenticate: false
     }
   },
   methods:{
     signup: function(){
-        this.message = " "
       const sign = auth.createUserWithEmailAndPassword(this.username, this.password)
       sign.then(user=>{
         if(user){
-            this.message = "successfully register "
             console.log('authenticated as ',user.uid)
             this.authenticate = true
             this.$router.push('/')
@@ -65,8 +53,6 @@ export default {
         }
         
          
-      }, err=>{
-          this.message = "unable to register invalid Email /password "
       })
       sign.catch(err=>{
         //   this.message = "unable to signin Email /password incorrect"
