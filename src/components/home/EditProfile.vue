@@ -1,78 +1,66 @@
 <template>
-      <div class="editProfile">
-        
-        
-         <div class="container-fluid ">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="alert alert-info alert-dismissable">
-                  <a class="panel-close close" data-dismiss="alert">×</a> 
-                  <i class="fa fa-coffee"></i>
-                   <strong>{{response.msg}}</strong>
-                </div>
-              </div>
-              
-            </div>
-              <h2>Edit profile</h2>
-            <div class="row">
-
-              <div class="col-md-3">
-                <div class="text-center profile_photo_con">
-                  <input style="display:none" ref="selectImage" class ="form-control"  type="file" v-on:change ="onFileSelected" >
-                  <!-- <button @click="$refs.selectImage.click()"> change Image </button> -->
-                  <div class="profile_photo">
-                    <img  @click="$refs.selectImage.click()" :src="currentUser.photoURL" class="avatar img-circle" alt="avatar">
-                  </div>
-                  
-                  <h6>Change Profile photo</h6>
-                  <input class= "btn btn-primary" v-if="showChangePhoto" @click="changePhoto" value="Change Photo" >
-                  
-                  <!-- <input type="file" class="form-control"> -->
-                </div>
-              </div>
-              <div class="col-md-9 personal-info">
-                 
-                <h3>Personal info</h3>
-                
-                  <form @submit.prevent="updateProfile" role="form">
-                    <div class="form-group row">
-                      <label for="fname" class="col-sm-2 col-form-label">First Name</label>
-                      <div class="col-sm-10">
-                        <input type="text" v-model="user.firstName"  class="form-control" id="fname" value="email@example.com">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
-                      <div class="col-sm-10">
-                        <input type="text" v-model="user.lastName"  class="form-control" id="lname" value="email@example.com">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="email" class="col-sm-2 col-form-label">Email</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" readonly  id="email" :value="currentUser.email">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary" value="Save Changes">Save Changes</button>
-                        <router-link :to="'/home/'+currentUser.uid" class="btn btn-secondary">Cancel</router-link>
-                        
-                      </div>
-                        
-                    </div>
-                  </form>
-              
+  <div class="editProfile">
+    <div class="container-fluid ">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-info alert-dismissable">
+            <a class="panel-close close" data-dismiss="alert">×</a> 
+            <i class="fa fa-coffee"></i>
+              <strong>{{response.msg}}</strong>
+          </div>
+        </div>        
+      </div>
+      <h2>Edit profile</h2>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="text-center profile_photo_con">
+            <input style="display:none" ref="selectImage" class ="form-control"  type="file" v-on:change ="onFileSelected" >
+            <!-- <button @click="$refs.selectImage.click()"> change Image </button> -->
+            <div class="profile_photo">
+              <img  @click="$refs.selectImage.click()" :src="currentUser.photoURL" class="avatar img-circle" alt="avatar">
+            </div>            
+            <h6>Change Profile photo</h6>
+            <input class= "btn btn-primary" v-if="showChangePhoto" @click="changePhoto" value="Change Photo" >           
+            <!-- <input type="file" class="form-control"> -->
+          </div>
+        </div>
+        <div class="col-md-9 personal-info">            
+          <h3>Personal info</h3>          
+          <form @submit.prevent="updateProfile" role="form">
+            <div class="form-group row">
+              <label for="fname" class="col-sm-2 col-form-label">First Name</label>
+              <div class="col-sm-10">
+                <input type="text" v-model="user.firstName"  class="form-control" id="fname" value="email@example.com">
               </div>
             </div>
+            <div class="form-group row">
+              <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
+              <div class="col-sm-10">
+                <input type="text" v-model="user.lastName"  class="form-control" id="lname" value="email@example.com">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email" class="col-sm-2 col-form-label">Email</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" readonly  id="email" :value="currentUser.email">
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary" value="Save Changes">Save Changes</button>
+                <router-link :to="'/home/'+currentUser.uid" class="btn btn-secondary">Cancel</router-link>                
+              </div>               
+            </div>
+          </form>      
         </div>
       </div>
-
+    </div>
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
-import {auth,rtdb,storageRef, db} from './../../firebase'
+// import axios from 'axios'
+import {auth, storageRef} from './../../firebase'
 export default {
   name: 'EditProfile',
   props: {
@@ -91,14 +79,6 @@ export default {
     }
   },
 
-  mounted: function () {
-    // if (this.currentUser != null) {
-    //     this.currentUser.providerData.forEach(function (profile) {
-         
-    //     });
-    //   }
- 
-  },
   methods:{
     /* update user profile */
       updateProfile: function () {
@@ -108,10 +88,10 @@ export default {
          displayName: this.user.firstName +' '+ this.user.lastName,
        }).then(function() {
         // Update successful.
-        console.log('Update successful.')
+        //console.log('Update successful.')
       }).catch(function(error) {
         // An error happened.
-        console.log('An error happened')
+        console.log('An error happened', error)
       }); 
     },
     onFileSelected(event){
@@ -148,6 +128,7 @@ export default {
             this.response.meg = 'Update successful profile name.'
           }).catch(function(error) {
             // An error happened.
+            console.log(error)
             this.response.meg ='An error happened'
           }); 
         });
@@ -160,6 +141,7 @@ export default {
 
       }).catch(function(error) {
         // An error happened.
+        console.log(error)
         console.log('An error happened')
       });
     },
@@ -170,45 +152,50 @@ export default {
         console.log('Update successful.')
       }).catch(function(error) {
         // An error happened.
+        console.log(error)
         console.log('An error happened')
       });
     },
     /* Set a user's a new password */
-    changePassword: function () {
-      var newPassword = getASecureRandomPassword();
+    changePassword: function (credential) {
+      // var newPassword = getASecureRandomPassword();
 
-      this.currentUser.updatePassword(newPassword).then(function() {
+      this.currentUser.updatePassword(credential).then(function() {
         // Update successful.
       }).catch(function(error) {
         // An error happened.
+        console.log(error)
       });
     },
     /* Send a password reset email */
      passwordReset: function () {
-      var auth = firebase.auth();
+      // var auth = firebase.auth();
       var emailAddress = "user@example.com";
 
       auth.sendPasswordResetEmail(emailAddress).then(function() {
         // Email sent.
       }).catch(function(error) {
         // An error happened.
+        console.log(error)
       });
     },
     /* Delete a user */
-     passwordReset: function () {
+     deleteUser: function () {
       this.currentUser.delete().then(function() {
         // User deleted.
       }).catch(function(error) {
         // An error happened.
+        console.log(error)
       });
     },
         /* Re-authenticate a user */
-    passwordReset: function () {
+    reauthenticate: function () {
       let credential = '12345'
       this.currentUser.reauthenticateAndRetrieveDataWithCredential(credential).then(function() {
         // User re-authenticated.
       }).catch(function(error) {
         // An error happened.
+        console.log(error)
       });
     },
     
@@ -218,14 +205,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.profile_photo_con h6{
-      float: left;
-    color: #fff;
-    margin-top: -40px;
-    margin-left: 20px;
-    text-transform: uppercase;
-    font-size: 13px;
 
+.profile_photo_con h6{
+  float: left;
+  color: #fff;
+  margin-top: -40px;
+  margin-left: 20px;
+  text-transform: uppercase;
+  font-size: 13px;
 }
 .editProfile h2{
   font-size: 30px;

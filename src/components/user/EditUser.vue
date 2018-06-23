@@ -206,7 +206,7 @@
 
 <script>
 //import axios from 'axios'
-import {auth,rtdb,storageRef, db} from './../../firebase'
+import {auth,rtdb,storageRef} from './../../firebase'
 import singleItem from './singleItem'
 export default {
   name: 'EditUser',
@@ -256,7 +256,7 @@ export default {
   },
    methods:{
 
-    showEdit(e){
+    showEdit(){
       this.editMood = true,
       this.displayMood = false
       this.displayDisplay = false
@@ -277,7 +277,7 @@ export default {
       let id = this.$route.params.id
       let currentUserId= auth.currentUser.uid
       //const user = rtdb.ref('users').child(currentUserId)
-      const user = rtdb.ref('users').child(currentUserId).child(id)
+      rtdb.ref('users').child(currentUserId).child(id)
         .set(this.singleFriend, (err=>{
           if(err){
             console.log(err)
@@ -321,7 +321,7 @@ export default {
           console.log('File available at', downloadURL);
         let friendId = this.$route.params.id
         //const user = rtdb.ref('users').child(currentUserId)
-        const user = rtdb.ref('users').child(currentUserId).child(friendId)
+        rtdb.ref('users').child(currentUserId).child(friendId)
           .update({"avatar": downloadURL})
         });
       });

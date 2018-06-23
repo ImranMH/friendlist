@@ -30,7 +30,7 @@
                 <td class="country_hide">{{user.country || "---"}}</td>
                 <td class="comunicationhide">{{user.communicationWay || "---"}}</td>
                 <td ><a v-if="user.mobile" :href=" `tel:${user.mobile}`">{{user.mobile}}</a><span v-else>{{'---'}}</span></td>
-                <td class="email hide_580"> <a v-if="user.mobile" :href=" `mailto:${user.email}`">{{user.email }}</a><span v-else>{{"---"}}</span></td>
+                <td class="email hide_580"> <a v-if="user.email" :href=" `mailto:${user.email}`">{{user.email }}</a><span v-else>{{"---"}}</span></td>
                 <td class="knowhide"><span  v-if="user.knowFrom"> {{user.knowFrom | moment("from","now", true)}}</span><span v-else>{{'---'}}</span></td>
               </tr>
             </tbody>
@@ -41,7 +41,7 @@
     </div>
     <div v-if="inputdata" class="row">
       <div v-if="orderFriendsByKnownFrom.length> 5" class="col-md-6">
-         <div class="friend_filter_list">
+        <div class="friend_filter_list">
            <h2 class="home_title">friends still with me</h2>
            <table class="info_table table">
              <thead>
@@ -124,20 +124,19 @@
             For Update friend go to friend home page and then use Update profile 
           </small>
         </div>
-      </div>
-      
+      </div>      
     </div>
-  </div>
- 
+  </div> 
 </template>
 
 <script>
 //import axios from 'axios'
 import {auth,rtdb} from './../../firebase'
+import _ from 'lodash'
 export default {
   name: 'Home',
   props: {
-    msg: String
+    // msg: String
   },
   data:function(){
     return {
@@ -150,10 +149,7 @@ export default {
       activeFriend:[],
     }
   },
-  computed: {
-    
- 
-  },
+
   created: function () {
       const user = rtdb.ref('users').child(this.currentUser.uid).orderByChild('age')
        user.on('value',snap=>{
@@ -185,14 +181,14 @@ export default {
   },
 
 
- filters: {
-  listFilter: function (value) {
-    if (!value) return ''
-      this.value.filter((item)=>{
+//  filters: {
+//   listFilter: function (value) {
+//     if (!value) return ''
+//       this.value.filter((item)=>{
 
-      })
-    }
-  },
+//       })
+//     }
+//   },
   computed:{
     orderFriendsByKnownFrom:function () {
       return _.orderBy(this.oldFriend,'knowFrom','desc')
@@ -220,174 +216,165 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin:  0px;
-}
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin:  0px;
+  }
+  .friend_filter_list{
+    border: 1px solid #555;
+    background: #212529;
+    color:#fff;
+    margin-top: 50px;
+    border-bottom: none;
 
-.friend_filter_list{
-  border: 1px solid #555;
-  background: #212529;
-  color:#fff;
-  margin-top: 50px;
-  border-bottom: none;
-
-}
-.user{
-  margin-top: 0px;
-}
-.list-group{
-  padding: 3px 0px 0px 3px;
-}
-.friend_list{
-  display: flex;
-  align-items: left;
-  justify-content: flex-start;
-  
-  text-align: left;
-  border-bottom: 1px solid #555;
-  margin-top: 5px;
-}
-.friend_list img{
-  width: 40px;
-  height: 40px;
-  border: 1px solid #ccc;
-  text-transform: capitalize;
-}
-.friend_list_title{
+  }
+  .user{
+    margin-top: 0px;
+  }
+  .list-group{
+    padding: 3px 0px 0px 3px;
+  }
+  .friend_list{
+    display: flex;
+    align-items: left;
+    justify-content: flex-start;
+    
+    text-align: left;
+    border-bottom: 1px solid #555;
+    margin-top: 5px;
+  }
+  .friend_list img{
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ccc;
+    text-transform: capitalize;
+  }
+  .friend_list_title{
     width: 30%;
     margin: 0 10px;
-}
-.friend_list_title h3{
-  margin: 0;
-  font-size: 14px;
- line-height: 16px;
- text-transform: capitalize;
-
-}
-.friend_list p{
-  margin: 0;
-  padding: 0;
-}
-small{
-  line-height: 15px;
-}
-p.know_from_2{
-  margin: 0 10px;
-  font-size: 15px;
-}
-.list_item{
-  border: 1px solid #ccc;
-}
-.home_title{
-  text-transform: capitalize;
-  font-size: 22px;
-  padding: 10px 0 5px;
-  text-shadow: 1px 1px 2px #000;
-}
-.info_table{
-  text-align: left;
-  text-transform: capitalize;
-}
-.table_item{
-  border:1px solid #555;
-  padding: 5px;
-}
-.table_item .avatar{
-  width: 50px;
-  height: 50px;
-}
-.table_item .name h3{
-  font-size: 16px;
-  margin-bottom: 0;
-  line-height: 14px;
-}
-.table_item .duration{
-  
-}
-.table_item .from{
-
-}
-.table_item th{
-   padding: 5px;
-  border:1px solid #555;
-}
-.table_avatar{
-  max-width: 100%;
-}
-.info_table td {
-  padding: 5px;
-  border:1px solid #555;
-}
-
-
-/* from user */
-.list_image{
-  width: 40px;
-  height: 29px;
-  margin-top: -0.50rem;
-  margin-bottom: -0.50rem;
-  max-width: 100%;
-
-}
-.user table{
-  text-align: left;
-  text-transform: capitalize;
-  margin: 0 auto;
-}
-tbody,thead{
-  color: #fff;
-}
-tr{
-  border: 1px solid #555;
-}
-td,th{
-  padding-right: 4px;
-}
-.email{
-  font-size: 12px;
-  text-transform: lowercase;
-}
-@media(max-width:900px){
-  .comunicationhide{
-    display: none;
   }
-  .knowhide{
-    display: none;
-  }
-}
-@media(max-width:730px){
-  .country_hide{
-    display: none;
-  }
-  tr td, tr a{
-    font-size: 12px;
-    line-height: 18px;
-  }
-  tr td {
-    padding: 2px;
-  }
+  .friend_list_title h3{
+    margin: 0;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: capitalize;
 
-}
-@media(max-width:580px){
-  .small_hide{
-    display: none;
   }
-  .edit_item input, select, .edit_item span{
-    margin-left: 10px;
-    padding: 2px 5px;
-    width: 250px;
+  .friend_list p{
+    margin: 0;
+    padding: 0;
   }
-
-}
-@media(min-width:1100px){
-  .email{
+  small{
+    line-height: 15px;
+  }
+  p.know_from_2{
+    margin: 0 10px;
+    font-size: 15px;
+  }
+  .list_item{
+    border: 1px solid #ccc;
+  }
+  .home_title{
+    text-transform: capitalize;
+    font-size: 22px;
+    padding: 10px 0 5px;
+    text-shadow: 1px 1px 2px #000;
+  }
+  .info_table{
+    text-align: left;
+    text-transform: capitalize;
+  }
+  .table_item{
+    border:1px solid #555;
+    padding: 5px;
+  }
+  .table_item .avatar{
+    width: 50px;
+    height: 50px;
+  }
+  .table_item .name h3{
     font-size: 16px;
+    margin-bottom: 0;
+    line-height: 14px;
+  }
+  /* .table_item .duration{
+    
+  }
+  .table_item .from{
+
+  } */
+
+  .table_avatar{
+    max-width: 100%;
   }
 
-}
+  /* from user */
+  .list_image{
+    width: 40px;
+    height: 29px;
+    margin-top: -0.50rem;
+    margin-bottom: -0.50rem;
+    max-width: 100%;
+
+  }
+  .user table{
+    text-align: left;
+    text-transform: capitalize;
+    margin: 0 auto;
+  }
+  tbody,thead{
+    color: #fff;
+  }
+  /* tr{
+    border: 1px solid #555;
+  }
+  td,th{
+    padding-right: 4px;
+  } */
+  .email{
+    font-size: 12px;
+    text-transform: lowercase;
+  }
+  @media(max-width:900px){
+    .comunicationhide{
+      display: none;
+    }
+    .knowhide{
+      display: none;
+    }
+  }
+  @media(max-width:730px){
+    .country_hide{
+      display: none;
+    }
+    tr td, tr a{
+      font-size: 12px;
+      line-height: 18px;
+    }
+    tr td {
+      padding: 2px;
+    }
+
+  }
+  @media(max-width:580px){
+    .small_hide{
+      display: none;
+    }
+    .edit_item input, select, .edit_item span{
+      margin-left: 10px;
+      padding: 2px 5px;
+      width: 250px;
+    }
+
+  }
+  @media(min-width:1100px){
+    .email{
+      font-size: 16px;
+    }
+
+  }
 </style>

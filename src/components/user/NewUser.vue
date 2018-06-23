@@ -41,7 +41,7 @@
 
 <script>
 //import axios from 'axios'
-import {auth,rtdb, db} from './../../firebase'
+import {auth,rtdb} from './../../firebase'
 //import Input from './input'
 export default {
   name: 'NewUser',

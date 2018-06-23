@@ -22,8 +22,6 @@
         <div class="col-md-4">
         <div class="contact_list">
           <h2>Find Me Online</h2>
-
-
           <div class="email contact_item" >
             <a href="" target="_top"><i class=""></i>{{'social.username'}}</a>
           </div>

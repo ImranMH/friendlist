@@ -32,7 +32,7 @@
                   <td class="hide_580">{{user.country || "---"}}</td>
                   <td class="hide_900">{{user.communicationWay || "---"}}</td>
                   <td ><a v-if="user.mobile" :href=" `tel:${user.mobile}`">{{user.mobile}}</a><span v-else>{{'---'}}</span></td>
-                  <td class="email hide_770"> <a v-if="user.mobile" :href=" `mailto:${user.email}`">{{user.email }}</a><span v-else>{{"---"}}</span></td>
+                  <td class="email hide_770"> <a v-if="user.email" :href=" `mailto:${user.email}`">{{user.email }}</a><span v-else>{{"---"}}</span></td>
                   <td class="hide_900"><span  v-if="user.knowFrom"> {{user.knowFrom | moment("from","now", true)}}</span><span v-else>{{'---'}}</span></td>
                 </tr>
               </tbody>
@@ -52,9 +52,9 @@
 </template>
 
 <script>
-import axios from 'axios'
-import {rtdb} from './../../firebase'
-import {auth, db} from './../../firebase'
+// import axios from 'axios'
+// import {rtdb} from './../../firebase'
+import {auth,rtdb} from './../../firebase'
 import _ from 'lodash'
 
 export default {
@@ -101,7 +101,7 @@ export default {
   }) */
   },
    mounted: function () {
-      const cu = auth.currentUser;
+      // const cu = auth.currentUser;
     },
   watch:{
  /*    '$route'(to, from){
@@ -138,19 +138,17 @@ export default {
 
 }
 .user table{
-  text-align: left;
+  /* text-align: left; */
   text-transform: capitalize;
   margin: 0 auto;
 }
 tbody,thead{
   color: #fff;
 }
-tr{
+/* tr{
   border: 1px solid #555;
-}
-td,th{
-  padding-right: 4px;
-}
+} */
+
 .email{
   font-size: 12px;
   text-transform: lowercase;

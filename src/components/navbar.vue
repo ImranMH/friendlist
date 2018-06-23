@@ -117,12 +117,11 @@ export default {
 
   methods:{
     logout: function() {        
-        auth.signOut().then(e=>{
+        auth.signOut().then(()=>{
         this.$router.push('/login')
     })
     },
     searchFriend(){
-        let self = this
         this.queryResult = []
         let serachResult= rtdb.ref('users').child(this.currentUser.uid).orderByChild('name').equalTo(this.queryFriend)
         serachResult.once('value', (snapshot)=>{

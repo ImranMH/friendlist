@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-    
+  <div id="app">    
     <Navbar :key="$route.fullPath" />
     <router-view></router-view>
     <Footer />
@@ -324,6 +323,21 @@ bottom: 40px;
   padding: 20px 0;
   line-height: 35px;
 }
+td,th{
+  padding-right: 4px;
+}
+table tr{
+    border: 1px solid #555;
+    text-align: center;
+}
+/* .info_table td {
+  padding: 5px;
+  border:1px solid #555;
+}
+.table_item th{
+   padding: 5px;
+  border:1px solid #555;
+} */
 /* input from css */
 /* @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
 * {
@@ -373,6 +387,11 @@ body {
 }
 .show_770{
   display: none;
+}
+@media(min-width:1200px){
+   tr td, th {
+    padding: 10px;
+  }
 }
 @media(max-width:900px){
   .hide_900{

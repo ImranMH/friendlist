@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import {auth,rtdb, db} from './../../firebase'
+import {rtdb} from './../../firebase'
 export default {
   name: "contact",
   props: {},
@@ -144,17 +144,17 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 /* contact page .....................................*/
-.contact {
-  background: #fff; }
-
-.contact_form {
-  width: 100%;
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  padding: 5px;
-  background: #eee;
-  padding-top: 15px;
-  margin-bottom: 40px;
+  .contact {
+    background: #fff;
+  }
+  .contact_form {
+    width: 100%;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    background: #eee;
+    padding-top: 15px;
+    margin-bottom: 40px;
   }
  
   .contact_form .top input {
@@ -162,14 +162,18 @@ export default {
     margin-bottom: 10px;
     height: 30px;
     padding: 6px;
-    font-size: 14px; }
+    font-size: 14px; 
+  }
   .contact_form .bottom {
-    width: 98%; }
-    .contact_form .bottom textarea {
-      width: 100%; }
+    width: 98%; 
+  }
+  .contact_form .bottom textarea {
+      width: 100%; 
+  }
   .contact_form .submit {
     margin: 20px;
-    overflow: hidden; }
+    overflow: hidden; 
+  }
   .contact_form .button {
     width: 100px;
     height: 40px;
@@ -178,45 +182,49 @@ export default {
     text-transform: uppercase;
     border: #ccc4c4 solid 1px;
     border-radius: 5px;
-    background: #fff; }
-    .contact_form .button:hover {
-      border: 1px solid #2693c3; }
+    background: #fff; 
+  }
+  .contact_form .button:hover {
+    border: 1px solid #2693c3; 
+  }
 
-.contact_item {
-  background: #fff;
-  margin-bottom: 10px;
-  padding: 0px; 
-  text-align: left;
-  border: 1px solid #ccc;
-}
+  .contact_item {
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 0px; 
+    text-align: left;
+    border: 1px solid #ccc;
+  }
   .contact_item span {
     border: 2px solid #ccc;
     border-radius: 50%;
     line-height: 20px;
     background: #e8e4e4;
     margin-right: 10px;
-    padding: 7px; }
+    padding: 7px; 
+  }
   .contact_item a {
     color: #555;
     text-decoration: none;
-    font-size: 16px; }
+    font-size: 16px; 
+  }
   .contact_item i{
     padding: 10px;
     border: 1px solid #ccc;
     background: #38a5e4;
     color: #fff;
     margin-right: 10px;
-    }
+  }
   .contact_item:hover span {
     background: #2693c3;
-    color: #f9f9f9; }
-
+    color: #f9f9f9; 
+  }
   .top{
     padding: 30px 0;
   }
-h2{
-  background: #eee;
+  h2{
+    background: #eee;
     padding: 10px;
     color: #555;
-}
+  }
 </style>

@@ -22,8 +22,7 @@
         <h4><router-link :to="'/user/'+item.id" >{{item.name}}</router-link></h4>
         <h5 v-if="item.subType">{{item.subType}}</h5>
         <h5 v-else-if ="items[0].type!==items[1].type"><router-link :to="'/users/'+item.type" >{{item.type}}</router-link></h5>
-        <h5 v-else >{{item.city}}</h5>
-        
+        <h5 v-else >{{item.city}}</h5>        
       </li>          
     </ul>
   </div>
@@ -32,7 +31,7 @@
 
 <script>
 //import axios from 'axios'
-import {auth,rtdb} from './../../firebase'
+//import {auth,rtdb} from './../../firebase'
 import AppItem from './AppInput'
 export default {
   name: 'ProfileItem',
@@ -46,12 +45,7 @@ export default {
       message: 'parents message'
     }
   },
-  created(){
-    
-  },
-  methods:{
 
-  },
   components:{
    'app-input' :AppItem
   }
@@ -59,22 +53,22 @@ export default {
 </script>
 <style scoped>
 .profile_top{
-    border: 1px solid rgb(105, 103, 103);
-    background: #e9ecef;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  border: 1px solid rgb(105, 103, 103);
+  background: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .block_home_top{
   display: flex;
-    align-items: center;
-    justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
 }
 .meta{
   margin-left: 20px;
-    text-align: left;
-    text-transform: capitalize;
-    color: #777;
+  text-align: left;
+  text-transform: capitalize;
+  color: #777;
 }
 .profile_item{
   background: #555;
