@@ -393,6 +393,12 @@ body {
     padding: 10px;
   }
 }
+@media(min-width:900px){
+  .form_container {
+    max-width: 700px;
+    width: 100%;
+  }
+}
 @media(max-width:900px){
   .hide_900{
     display: none;
@@ -401,6 +407,9 @@ body {
 @media(max-width:770px){
   .hide_770{
     display: none;
+  }
+  #contact h3{
+    font-size: 25px;
   }
   tr td, tr a{
     font-size: 12px;
