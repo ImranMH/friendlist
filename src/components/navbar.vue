@@ -1,69 +1,64 @@
 <template>
-    <div class="nav_area">
-         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <router-link to="/" class="navbar-brand ">Friendlist</router-link>
-            <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i> </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavId">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active" v-if="isLoggedIn">
-                        
-                        <router-link to="/" class="nav-link"><i class="fa fa-home"></i> Home</router-link>
-                    </li>
-                    <li class="nav-item " v-if="isLoggedIn">
-                        <router-link to="/user" class="nav-link"><i class="fas fa-user"></i> Friends</router-link>
-                    </li>
-                    
-                </ul>
-                <form class="form-inline my-2 my-lg-0 mobile_off">
-                    <input class="form-control mr-sm-2" v-model="queryFriend" type="text" placeholder="Search">
-                    <button @click.prevent="searchFriend" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <form class="show-tablet">
-                    <input class="" v-model="queryFriend" >
-                    <button @click.prevent="searchFriend" class="" type="submit"><i class="fa fa-search"></i></button>
-                </form>
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0 navbar-right tablet" >
-                    <li class=" nav-item" v-if="isLoggedIn" >
-                        <router-link :to="'/home/'+currentUser.uid" class="nav-link">{{currentUser.displayName ||currentUser.email }}</router-link>
-                    </li>
-                    <li class=" nav-item" v-show="!isLoggedIn" >
-                        <router-link to="/signup" class="nav-link"><i class="fas fa-sign-in-alt"></i> Signup</router-link>
-                    </li>
-                    <li @click="logout"  v-show="isLoggedIn"   class=" nav-item">
-                        <router-link  to="/login" class="nav-link"><i class="fa fa-edit"></i> Logout</router-link>
-                    </li>                   
-                </ul>
-            </div>
-        </nav>
-       
-        <div class="container">
-            <div class="row" v-if="searched">           
-                <div class="col-md-12">
-                    <ul class="profile_item" v-if="queryResult.length > 0" >
-                    
-                        <h2 class="profile_item_title"> search result </h2>
-                        <li v-for ="item of queryResult" :key="item.name">
-                            <div class="avatar">
-                            <img :src="item.avatar" :alt="item.name">  
-                            </div>
-                        
-                            <h4><router-link :to="'/user/'+item.id" >{{item.name}}</router-link></h4>
-                            <h5 ><router-link :to="'/users/'+item.type" >{{item.type}}</router-link></h5>
-                            <h5 v-if="item.subType">{{item.subType}}</h5>    
-                            <h5>{{item.city}}</h5>
-                            
-                        </li>
-                            
-                    </ul>
-                    <div class="profile_item" v-else >
-                        <h2 class="profile_item_title"> search result </h2>
-                        <p class="no_data">no data found</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="nav_area">
+		<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+				<router-link to="/" class="navbar-brand ">Friendlist</router-link>
+				<button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+						aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i> </button>
+				<div class="collapse navbar-collapse" id="collapsibleNavId">
+					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+						<li class="nav-item active" v-if="isLoggedIn">
+								
+							<router-link to="/" class="nav-link"><i class="fa fa-home"></i> Home</router-link>
+						</li>
+						<li class="nav-item " v-if="isLoggedIn">
+							<router-link to="/user" class="nav-link"><i class="fas fa-user"></i> Friends</router-link>
+						</li>									
+					</ul>
+					<form class="form-inline my-2 my-lg-0 mobile_off">
+						<input class="form-control mr-sm-2" v-model="queryFriend" type="text" placeholder="Search">
+						<button @click.prevent="searchFriend" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+					<form class="show-tablet">
+						<input class="" v-model="queryFriend" >
+						<button @click.prevent="searchFriend" class="" type="submit"><i class="fa fa-search"></i></button>
+					</form>
+					<ul class="navbar-nav mr-auto mt-2 mt-lg-0 navbar-right tablet" >
+						<li class=" nav-item" v-if="isLoggedIn" >
+							<router-link :to="'/home/'+currentUser.uid" class="nav-link">{{currentUser.displayName ||currentUser.email }}</router-link>
+						</li>
+						<li class=" nav-item" v-show="!isLoggedIn" >
+							<router-link to="/signup" class="nav-link"><i class="fas fa-sign-in-alt"></i> Signup</router-link>
+						</li>
+						<li @click="logout"  v-show="isLoggedIn"   class=" nav-item">
+							<router-link  to="/login" class="nav-link"><i class="fa fa-edit"></i> Logout</router-link>
+						</li>                   
+					</ul>
+				</div>
+		</nav>
+		
+		<div class="container-fluid">
+			<div class="row" v-if="searched">           
+				<div class="col-md-12">
+					<ul class="profile_item" v-if="queryResult.length > 0" >							
+						<h2 class="profile_item_title"> search result </h2>
+						<li v-for ="item of queryResult" :key="item.name">
+							<div class="avatar">
+								<img :src="item.avatar" :alt="item.name">  
+							</div>							
+							<h4><router-link :to="'/user/'+item.id" >{{item.name}}</router-link></h4>
+							<h5 ><router-link :to="'/users/'+item.type" >{{item.type}}</router-link></h5>
+							<h5 v-if="item.subType">{{item.subType}}</h5>    
+							<h5>{{item.city}}</h5>										
+						</li>											
+					</ul>
+					<div class="profile_item" v-else >
+						<h2 class="profile_item_title"> search result </h2>
+						<p class="no_data">no friend found</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
     <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

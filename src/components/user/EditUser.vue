@@ -75,9 +75,21 @@
                   <span v-show="displayMood">{{singleFriend.age}} </span> 
                 </div>
               </li>
-                <li class="edit_item">
+              <li class="edit_item">
                 <div class="mobile">
-                    mobile:<input v-show="editMood" v-model="singleFriend.mobile" type="tel" placeholder="mobile">
+                    City:<input v-show="editMood" v-model="singleFriend.city" type="text" placeholder="city">
+                  <span v-show="displayMood">{{singleFriend.city}} </span> 
+                </div>
+              </li>
+              <li class="edit_item">
+                <div class="mobile">
+                    Country:<input v-show="editMood" v-model="singleFriend.country" type="text" placeholder="country">
+                  <span v-show="displayMood">{{singleFriend.country}} </span> 
+                </div>
+              </li>
+              <li class="edit_item">
+                <div class="mobile">
+                    Mobile:<input v-show="editMood" v-model="singleFriend.mobile" type="tel" placeholder="mobile">
                   <span v-show="displayMood">{{singleFriend.mobile}} </span> 
                 </div>
               </li>
@@ -87,7 +99,7 @@
                   <span v-show="displayMood">{{singleFriend.address}} </span> 
                 </div>
               </li>
-                <li class="edit_item">
+              <li class="edit_item">
                 <div class="currently_live">
                   Current Location: <input v-show="editMood" v-model="singleFriend.currentLocation" type="text" placeholder="Current Location">
                   <span v-show="displayMood">{{singleFriend.currentLocation || 'Not specified yet'}} </span> 
@@ -95,7 +107,7 @@
               </li>
               <li class="edit_item">
                 <div class="sex">
-                    meet in real life :<select v-show="editMood" v-model="singleFriend.isMeet"> 
+                    Meet in real life :<select v-show="editMood" v-model="singleFriend.isMeet"> 
                       <option value=true>Yes</option>
                       <option value=false>No</option>
                     </select>
@@ -119,7 +131,7 @@
               </li>
               <li class="edit_item">
                 <div class="sex">
-                    sex:<select v-show="editMood" v-model="singleFriend.sex"> 
+                    Sex:<select v-show="editMood" v-model="singleFriend.sex"> 
                       <option value="male">male</option>
                       <option value="female">female</option>
                     </select>
@@ -137,13 +149,13 @@
               </li>
               <li class="edit_item" v-if="singleFriend.type === 'family Member' || singleFriend.type === 'relatives'">
                 <div class="currently_live">
-                  type of Relatives <input v-show="editMood" v-model="singleFriend.subType" type="text" placeholder="Brother">
+                  Type of Relatives <input v-show="editMood" v-model="singleFriend.subType" type="text" placeholder="Brother">
                   <span v-show="displayMood">{{singleFriend.subType}} </span> 
                 </div>
               </li>
               <li class="edit_item">
                 <div class="status">
-                    status:<select v-show="editMood" v-model="singleFriend.status"> 
+                    Status:<select v-show="editMood" v-model="singleFriend.status"> 
                       <option value="connected">connected</option>
                       <option value="disconnected">disconnected</option>
                       <option value="abandon">abandon</option>

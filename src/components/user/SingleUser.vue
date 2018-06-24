@@ -71,7 +71,11 @@
       <div class="col-md-3">
         <div class="info_block">
           <h3>Current City :</h3>
-          <strong>{{singleFriend.city +', '+ singleFriend.country  || '---' }}</strong>
+          <strong>
+            <span v-if="singleFriend.city">{{singleFriend.city }}, </span> 
+            <span v-if="singleFriend.country ">{{singleFriend.country}} </span>
+            <span v-else >{{'---'}}</span>
+          </strong>
         </div>
       </div>
       <div class="col-md-3">
