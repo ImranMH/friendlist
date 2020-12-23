@@ -79,8 +79,9 @@ export default {
         
       })
       sign.catch(err=>{
-        this.message= "can't login email/password invaild"
-          console.log(err)
+        this.message= "can't login email/password invaild",
+        this.error = err
+          
       })
     },
     loginWithFacebook(){
